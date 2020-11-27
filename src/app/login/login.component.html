@@ -1,7 +1,16 @@
 <h2>Login</h2>
-<label for="uname">Benutzername:
-    <input id="uname" type="text">
-</label>
-<label for="pword">Passwort:
-    <input id="pword" type="password">
-</label>
+<div>
+    <label for="uname">Benutzername:
+        <input id="uname" type="text">
+    </label>
+    <label for="pword">Passwort:
+        <input id="pword" type="password" placeholder="Passwort">
+    </label>
+</div>
+<div>
+    <button type ="button" id="login">Login</button>
+    <a routerLink="/register">
+        <button type = "button" id="register"> Registrieren</button>
+    </a>
+    <button type ="button" id="forgot_pword">Passwort vergessen</button>
+</div>
