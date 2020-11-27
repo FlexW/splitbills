@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "splitbills": {
+    "SplitBills": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/splitbills",
+            "outputPath": "dist/SplitBills",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "splitbills:build"
+            "browserTarget": "SplitBills:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "splitbills:build:production"
+              "browserTarget": "SplitBills:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "splitbills:build"
+            "browserTarget": "SplitBills:build"
           }
         },
         "test": {
@@ -116,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "splitbills:serve"
+            "devServerTarget": "SplitBills:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "splitbills:serve:production"
+              "devServerTarget": "SplitBills:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "splitbills"
+  "defaultProject": "SplitBills"
 }
