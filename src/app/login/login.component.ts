@@ -10,9 +10,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  public btnClick(): void {
+ /* public btnClick(): void {
     this.router.navigateByUrl('/register');
-  };
+  };*/
 
   ngOnInit(): void {
   }
