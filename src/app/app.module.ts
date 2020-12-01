@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPwComponent } from './forgot-pw/forgot-pw.component';
+import { fakeBackendProvider } from './_helpers';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { ForgotPwComponent } from './forgot-pw/forgot-pw.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
