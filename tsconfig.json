@@ -11,6 +11,7 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+     // "strictPropertyInitialization": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
@@ -19,7 +20,10 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@environments/*": ["src/environments/*"]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
