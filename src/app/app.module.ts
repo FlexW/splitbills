@@ -8,12 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { LoginComponent } from './login';
-import { RouterModule } from '@angular/router';
 import { RegisterComponent } from './register';
 import { ForgotPwComponent } from './forgot-pw/forgot-pw.component';
 import { HomeComponent } from './home';
 
-//used to create fake backend
+// used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 
 @NgModule({
@@ -30,11 +29,11 @@ import { fakeBackendProvider } from './_helpers';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider
-  ],
+  // providers: [
+  //   { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  //   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  //   fakeBackendProvider
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
