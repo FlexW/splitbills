@@ -9,7 +9,7 @@ import { ForgotPwComponent } from './forgot-pw';
 import { HomeComponent } from './home';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] }, // Hier ist Änderung zu Tutorial
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] }, 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'forgot-pw', component: ForgotPwComponent},

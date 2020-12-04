@@ -12,13 +12,13 @@ import { AuthenticationService } from '../_services'
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
-    first: new FormControl('', Validators.minLength(2)),           // musste initialisieren sonst error (false in config)
+    first: new FormControl('', Validators.minLength(2)),           
     last: new FormControl(''),
   });;
   loading = false;
   submitted = false;
-  returnUrl: string = '';                                          // ini
-  error: string = '';                                              // ini 
+  returnUrl = '';                                        
+  error = '';                                             
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'; // Erklärung :) 
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   get f() { return this.loginForm.controls; }
 
