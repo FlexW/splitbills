@@ -1,5 +1,8 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { shareReplay, map } from 'rxjs/operators';
 
 import { AuthenticationService } from './_services';
 
@@ -12,14 +15,18 @@ export class AppComponent {
   title = 'SplitBills';
   currentUser: unknown;
 
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map((result) => result.matches),
+      shareReplay()
+    );
+
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private router: Router,
     private authenticationService: AuthenticationService
-  ) {
-    // this.authenticationService.currentUser.subscribe(
-    //   (x) => (this.currentUser = x)
-    // );
-  }
+  ) {}
 
   logout(): void {
     this.authenticationService.logout();

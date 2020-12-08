@@ -1,15 +1,58 @@
-<h2>Login</h2>
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    margin: 2em auto;
+    max-width: 400px;
+  "
+>
+  <mat-card class="mat-elevation-z6" style="flex-grow: 1">
+    <mat-card-content>
+      <h2>Login into your Account</h2>
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="email">Email</label>
-    <input type="text" formControlName="email" />
-  </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your email address</mat-label>
+            <input matInput required formControlName="email" />
+            <mat-error *ngIf="loginForm.controls.email.invalid">{{
+              getEmailErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </p>
 
-  <label for="password">Password</label>
-  <input type="password" formControlName="password" />
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              required
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword"
+            >
+              <mat-icon>{{
+                hidePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.controls.email.invalid">{{
+              getPasswordErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </p>
 
-  <button type="submit">Login</button>
-</form>
-
-<a [routerLink]="['/register']">Register</a>
+        <div style="display: flex; justify-content: space-between">
+          <a class="mat-button" [routerLink]="['/register']">Register</a>
+          <button class="mat-raised-button" type="submit">Login</button>
+        </div>
+        <mat-error *ngIf="loginError">{{ getLoginErrorMessage() }}</mat-error>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

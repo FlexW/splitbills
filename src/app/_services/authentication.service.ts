@@ -73,7 +73,7 @@ export class AuthenticationService {
   private getHeaders(email: string, password: string): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: btoa(email + ':' + password),
+      Authorization: `Basic ${btoa(email + ':' + password)}`,
     });
   }
 }

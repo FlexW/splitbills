@@ -12,6 +12,10 @@ import { AuthenticationService } from '../_services';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  loginError = false;
+  loginErrorMessage = 'Email or password wrong';
+
+  hidePassword = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,7 +24,7 @@ export class LoginComponent implements OnInit {
   ) {
     // init form
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required],
     });
   }
@@ -30,6 +34,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.loginError = false;
+
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
@@ -51,8 +57,35 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
         },
         (error) => {
-          console.warn(error);
+          this.loginError = true;
+          this.loginErrorMessage = error.error.message;
         }
       );
+  }
+
+  getEmailErrorMessage(): string {
+    const email = this.loginForm.controls.email;
+
+    if (email.hasError('required')) {
+      return 'You must enter a email';
+    } else if (email.hasError('email')) {
+      return 'Not a valid email';
+    }
+
+    return '';
+  }
+
+  getPasswordErrorMessage(): string {
+    const password = this.loginForm.controls.password;
+
+    if (password.hasError('required')) {
+      return 'You must enter a password';
+    }
+
+    return '';
+  }
+
+  getLoginErrorMessage(): string {
+    return this.loginErrorMessage;
   }
 }

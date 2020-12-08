@@ -13,10 +13,10 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 const users = [
   {
     id: 1,
-    firstName: 'Tim',
-    lastName: 'Weilbach',
-    email: 'TPaW',
-    password: 'test',
+    firstName: 'Max',
+    lastName: 'Muster',
+    email: 'muster@mail.de',
+    password: 'secret',
   },
 ];
 
@@ -58,11 +58,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function authenticate(): Observable<HttpEvent<unknown>> {
       const headers = request.headers;
 
-      const user = users.find(
-        (user) =>
-          headers.get('Authorization') ===
-          btoa(user.email + ':' + user.password)
-      );
+      const auth = headers.get('Authorization');
+
+      const user = users.find((user) => {
+        const actual = `Basic ${btoa(user.email + ':' + user.password)}`;
+        return auth === actual;
+      });
       if (!user) return error('Email or password is incorrect');
       return ok({
         token: 'fake-jwt-token',
