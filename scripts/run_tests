@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+TEST_CMD="npx ng test"
+COMMON_ARGS=--browsers=ChromeHeadlessCI
+
+if [ "$1" == "watch" ]; then
+  ${TEST_CMD} ${COMMON_ARGS}
+else
+  ${TEST_CMD} ${COMMON_ARGS} --no-watch
+fi
