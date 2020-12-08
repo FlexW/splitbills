@@ -38,12 +38,12 @@ var AuthenticationService = /** @class */ (function () {
     enumerable: false,
     configurable: true,
   });
-  AuthenticationService.prototype.login = function (username, password) {
+  AuthenticationService.prototype.login = function (email, password) {
     var _this = this;
     var config;
     return this.http
       .post(config.apiUrl + '/users/authenticate', {
-        username: username,
+        email: email,
         password: password,
       })
       .pipe(

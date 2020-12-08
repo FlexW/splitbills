@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   ) {
     // init form
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -38,11 +38,11 @@ export class LoginComponent implements OnInit {
     // try to login user
     const controls = this.loginForm.controls;
 
-    const username = controls.username.value;
+    const email = controls.email.value;
     const password = controls.password.value;
 
     this.authenticationService
-      .login(username, password)
+      .login(email, password)
       .pipe(first())
       .subscribe(
         () => {

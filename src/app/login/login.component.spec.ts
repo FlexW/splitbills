@@ -55,7 +55,7 @@ describe('LoginComponent', () => {
     authenticationService.login.and.returnValue(of({ token: 'fake-token' }));
 
     const controls = component.loginForm.controls;
-    controls['username'].setValue(email);
+    controls['email'].setValue(email);
     controls['password'].setValue(password);
 
     component.onSubmit();
@@ -73,7 +73,7 @@ describe('LoginComponent', () => {
     authenticationService.login.and.returnValue(of({ token: 'fake-token' }));
 
     const controls = component.loginForm.controls;
-    controls['username'].setValue(email);
+    controls['email'].setValue(email);
     controls['password'].setValue(password);
 
     component.onSubmit();
@@ -90,7 +90,7 @@ describe('LoginComponent', () => {
     authenticationService.login.and.returnValue(of({ token: 'fake-token' }));
 
     const controls = component.loginForm.controls;
-    controls['username'].setValue(email);
+    controls['email'].setValue(email);
     controls['password'].setValue(password);
 
     component.onSubmit();

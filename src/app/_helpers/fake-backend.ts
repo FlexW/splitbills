@@ -23,7 +23,7 @@ const users = [
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(
-    request: HttpRequest<{ username: string; password: string }>,
+    request: HttpRequest<{ email: string; password: string }>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     // wrap in delayed observable to simulate server api call
@@ -63,7 +63,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           headers.get('Authorization') ===
           btoa(user.email + ':' + user.password)
       );
-      if (!user) return error('Username or password is incorrect');
+      if (!user) return error('Email or password is incorrect');
       return ok({
         token: 'fake-jwt-token',
       });
