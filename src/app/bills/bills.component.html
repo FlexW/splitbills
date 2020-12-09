@@ -1,0 +1,8 @@
+<div style="width: 100%; height: 100%">
+  <cdk-virtual-scroll-viewport itemSize="30" class="viewport">
+    <mat-card class="mat-elevation-z6" *cdkVirtualFor="let bill of bills">
+      <mat-card-title>{{ bill.description }}</mat-card-title>
+      <mat-card-content>Content bla bla bla</mat-card-content>
+    </mat-card>
+  </cdk-virtual-scroll-viewport>
+</div>
