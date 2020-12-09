@@ -41,7 +41,7 @@
                 hidePassword ? "visibility_off" : "visibility"
               }}</mat-icon>
             </button>
-            <mat-error *ngIf="loginForm.controls.email.invalid">{{
+            <mat-error *ngIf="loginForm.controls.password.invalid">{{
               getPasswordErrorMessage()
             }}</mat-error>
           </mat-form-field>
