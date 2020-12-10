@@ -17,6 +17,5 @@ export class BillsComponent {
       const bill: Bill = { description: 'Bill ' + i, amount: 245 };
       this.bills.push(bill);
     }
-    console.log(this.bills);
   }
 }

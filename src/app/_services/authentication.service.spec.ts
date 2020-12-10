@@ -50,7 +50,7 @@ describe('AuthenticationService', () => {
       'application/json'
     );
     expect(request.request.headers.get('Authorization')).toEqual(
-      btoa(email + ':' + password)
+      'Basic ' + btoa(email + ':' + password)
     );
   });
 
