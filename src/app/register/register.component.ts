@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../_services';
 import { first } from 'rxjs/operators';
@@ -12,13 +11,12 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  registerError: boolean = false;
-  registerErrorMessage: string = 'Verify your inputs';
+  registerError = false;
+  registerErrorMessage = 'Verify your inputs';
 
   hidePassword = true;
 
   constructor(
-    private location: Location,
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
     private router: Router
