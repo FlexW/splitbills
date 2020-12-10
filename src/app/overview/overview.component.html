@@ -1,4 +1,8 @@
-<mat-tab-group mat-stretch-tabs style="height: 100%; width: 100%">
+<mat-tab-group
+  (selectedTabChange)="onSelectedTabChange($event)"
+  mat-stretch-tabs
+  style="height: 100%; width: 100%"
+>
   <mat-tab label="Friends">
     <div style="background: red; height: 100%; width: 100%">Friends</div>
   </mat-tab>

@@ -1,11 +1,15 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { shareReplay, map } from 'rxjs/operators';
+import { ToolbarService } from './_services/toolbar.service';
 
 import { AuthenticationService } from './_services';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,6 +17,7 @@ import { AuthenticationService } from './_services';
 })
 export class AppComponent {
   title = 'SplitBills';
+
   currentUser: unknown;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -25,8 +30,13 @@ export class AppComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private authenticationService: AuthenticationService
-  ) {}
+    private authenticationService: AuthenticationService,
+    private toolbarService: ToolbarService
+  ) {
+    toolbarService.title.subscribe((title) => {
+      this.title = title;
+    });
+  }
 
   logout(): void {
     this.authenticationService.logout();

@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,11 +24,13 @@ import { JwtInterceptor } from './_helpers';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { HomeComponent } from './home';
+import { BillsComponent } from './bills/bills.component';
+import { OverviewComponent } from './overview/overview.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
-import { BillsComponent } from './bills/bills.component';
-import { OverviewComponent } from './overview/overview.component';
+import { BillListItemComponent } from './bill-list-item/bill-list-item.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ import { OverviewComponent } from './overview/overview.component';
     HomeComponent,
     BillsComponent,
     OverviewComponent,
+    BillListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,8 @@ import { OverviewComponent } from './overview/overview.component';
     ScrollingModule,
     FlexLayoutModule,
     MatTabsModule,
+    MatMenuModule,
+    MatExpansionModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

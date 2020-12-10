@@ -1,1 +1,1 @@
-export * from './bill';
+export * from './models';

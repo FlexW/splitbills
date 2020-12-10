@@ -1,0 +1,36 @@
+<mat-card class="mat-elevation-z6">
+  <mat-card-title>{{ bill.description }}</mat-card-title>
+  <mat-card-subtitle>{{ bill.date }}</mat-card-subtitle>
+  <mat-card-content>
+    <div
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      "
+    >
+      <div style="align-self: flex-start; color: red">
+        Max Muster paid 25.57 €
+      </div>
+      <div style="align-self: flex-end; color: red">You owe 15.30 €</div>
+    </div>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="expand">
+      <div>
+        <br />
+        Felix Mann borrowed 15.00 €
+        <br />
+        Max Muster borrowed 10.57 €
+      </div>
+    </mat-expansion-panel>
+  </mat-card-content>
+  <mat-card-actions style="padding: 0px">
+    <button mat-button *ngIf="!expand" (click)="expand = true">DETAILS</button>
+    <button mat-button *ngIf="expand" (click)="expand = false">
+      HIDE DETAILS
+    </button>
+    <div fxFlex></div>
+    <button mat-icon-button><mat-icon>delete</mat-icon></button>
+    <button mat-icon-button><mat-icon>edit</mat-icon></button>
+  </mat-card-actions>
+</mat-card>

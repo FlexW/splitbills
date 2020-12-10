@@ -1,5 +1,6 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BillsComponent } from '../bills/bills.component';
@@ -12,7 +13,12 @@ describe('OverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatTabsModule, BrowserAnimationsModule, ScrollingModule],
+      imports: [
+        MatTabsModule,
+        BrowserAnimationsModule,
+        ScrollingModule,
+        MatIconModule,
+      ],
       declarations: [OverviewComponent, BillsComponent],
     }).compileComponents();
   });

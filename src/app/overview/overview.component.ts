@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+
+import { ToolbarService } from '../_services/toolbar.service';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.css'],
+  styleUrls: ['./overview.component.sass'],
 })
-export class OverviewComponent implements OnInit {
-  constructor() {}
+export class OverviewComponent {
+  constructor(private toolbarService: ToolbarService) {}
 
-  ngOnInit(): void {}
+  onSelectedTabChange(event: MatTabChangeEvent) {}
 }
