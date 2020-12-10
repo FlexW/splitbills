@@ -10,6 +10,12 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
+interface User {
+  lastName: string;
+  firstName: string;
+  email: string;
+  password: string;
+}
 const users = [
   {
     id: 1,
@@ -23,7 +29,7 @@ const users = [
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(
-    request: HttpRequest<{ email: string; password: string }>,
+    request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     // wrap in delayed observable to simulate server api call
@@ -44,8 +50,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           request.method === 'POST':
           return authenticate();
 
-        // case request.url.endsWith('/users') && request.method == 'POST':
-        //   return register();
+        case request.url.endsWith('/users') && request.method == 'POST':
+          return register();
 
         default:
           // pass through any requests not handled above
@@ -70,15 +76,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       });
     }
 
-    // function register(): Observable<HttpEvent<unknown>> {
-    //   const body = request.body;
+    function register(): Observable<HttpEvent<unknown>> {
+      const body = request.body as User;
+      const user = {
+        id: users.length + 1,
+        lastName: body.lastName,
+        firstName: body.firstName,
+        email: body.email,
+        password: body.password,
+      };
 
-    //   // TODO: Validate data
+      // TODO: Validate data
+      users.push(user);
 
-    //   // TODO: Add new user to users
-
-    //   // TODO: Return id
-    // }
+      return ok({
+        message: 'Created user.',
+        user: { id: user.id },
+      });
+    }
 
     // helper functions
 

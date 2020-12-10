@@ -1,24 +1,105 @@
-<h2>Register</h2>
-<!-- <h2>Registrieren</h2>
-     <form>
-     <label id="email">E-Mail:
-     <input id="email" type ="email">
-     </label>
-     <label id="email">E-Mail:
-     <input id="email" type ="email">
-     </label>
-     <label id="password">Passwort:
-     <input id="password" type ="password" placeholder="Passwort">
-     </label>
-     <label id="rpassword">Passwort wiederholen:
-     <input id="rpassword" type ="rpassword" placeholder="Passwort wiederholen">
-     </label>
-     <label id="firstName">Vorname:
-     <input id="firstName" type ="text">
-     </label>
-     <label id="lastName">Nachname:
-     <input id="lastName" type ="text">
-     </label>
-     </form>
-     <button type ="submit" id="sendCredentials">Bestätigen</button>
-     <button (click)="goBack()" type ="button" id="goBack">Zurück</button> -->
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    margin: 2em auto;
+    max-width: 400px;
+  "
+>
+  <mat-card class="mat-elevation-z6" style="flex-grow: 1">
+    <mat-card-content>
+      <h2>Register a new Account</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your last name</mat-label>
+            <input matInput required formControlName="lastName" />
+            <mat-error *ngIf="registerForm.controls.lastName.invalid">{{
+              getLastNameErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your first name</mat-label>
+            <input matInput required formControlName="firstName" />
+            <mat-error *ngIf="registerForm.controls.firstName.invalid">{{
+              getFirstNameErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your email address</mat-label>
+            <input matInput required formControlName="email" />
+            <mat-error *ngIf="registerForm.controls.email.invalid">{{
+              getEmailErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              required
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword"
+            >
+              <mat-icon>{{
+                hidePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error *ngIf="registerForm.controls.password.invalid">{{
+              getPasswordErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password again</mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              required
+              formControlName="passwordRepeat"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword"
+            >
+              <mat-icon>{{
+                hidePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error *ngIf="registerForm.controls.passwordRepeat.invalid">{{
+              getPasswordRepeatErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </p>
+
+        <div style="display: flex; justify-content: space-between">
+          <a class="mat-button" [routerLink]="['/login']">Login</a>
+          <button class="mat-raised-button" type="submit">Register</button>
+        </div>
+        <mat-error *ngIf="registerError">{{
+          getRegisterErrorMessage()
+        }}</mat-error>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
