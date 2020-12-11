@@ -3,14 +3,9 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { TestScheduler } from 'rxjs/testing';
 
 import { AuthenticationService } from './authentication.service';
 import { environment } from '@environments/environment';
-
-const testScheduler = new TestScheduler((actual, expected) => {
-  expect(actual).toEqual(expected);
-});
 
 describe('AuthenticationService', () => {
   let service: AuthenticationService;

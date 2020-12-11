@@ -6,11 +6,13 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 interface CurrentUser {
+  id: number;
   email: string;
   token: string;
 }
 
 interface AuthenticateRequestResult {
+  id: number;
   token: string;
 }
 
@@ -54,7 +56,11 @@ export class AuthenticationService {
         map((result: AuthenticateRequestResult) => {
           // store user details and token in local storage to keep
           // user logged in between page refreshes
-          const user: CurrentUser = { email: email, token: result.token };
+          const user: CurrentUser = {
+            id: result.id,
+            email: email,
+            token: result.token,
+          };
 
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
