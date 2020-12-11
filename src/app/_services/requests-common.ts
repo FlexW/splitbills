@@ -32,8 +32,25 @@ export class ForbiddenError extends RequestError {
   }
 }
 
+export class UnknownError extends RequestError {
+  constructor(public message: string = 'Unknown error') {
+    super(message);
+  }
+}
+
 export function handleError(
   error: HttpErrorResponse
 ): Observable<RequestError> {
-  return of(new BadRequestError());
+  switch (error.status) {
+    case 401:
+      return of(new UnauthorizedError());
+
+    case 403:
+      return of(new ForbiddenError());
+
+    case 404:
+      return of(new BadRequestError());
+  }
+
+  return of(new UnknownError());
 }
