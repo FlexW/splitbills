@@ -9,26 +9,27 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ToolbarService {
-  // constructor(
-  //   @Inject('ToolbarStateObserver') private observer: ToolbarStateObserver
-  // ) {}
-
-  // public get title() {
-  //   return this._title;
-  // }
-
-  // public set title(title: string) {
-  //   this._title = title;
-  //   this.observer.setTitle(this._title);
-  // }
-
-  // private _title = 'SplitBills';
-
   private titleSource = new Subject<string>();
 
   title = this.titleSource.asObservable();
 
   setTitle(title: string) {
     this.titleSource.next(title);
+  }
+
+  private showSideNavSource = new Subject<boolean>();
+
+  showSideNav = this.showSideNavSource.asObservable();
+
+  setShowSideNav(value: boolean) {
+    this.showSideNavSource.next(value);
+  }
+
+  private showMenuSource = new Subject<boolean>();
+
+  showMenu = this.showMenuSource.asObservable();
+
+  setShowMenu(value: boolean) {
+    this.showMenuSource.next(value);
   }
 }

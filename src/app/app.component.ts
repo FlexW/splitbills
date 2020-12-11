@@ -17,6 +17,8 @@ import { AuthenticationService } from './_services';
 })
 export class AppComponent {
   title = 'SplitBills';
+  showMenu = true;
+  showSideNav = true;
 
   currentUser: unknown;
 
@@ -35,6 +37,12 @@ export class AppComponent {
   ) {
     toolbarService.title.subscribe((title) => {
       this.title = title;
+    });
+    toolbarService.showMenu.subscribe((value) => {
+      this.showMenu = value;
+    });
+    toolbarService.showSideNav.subscribe((value) => {
+      this.showSideNav = value;
     });
   }
 

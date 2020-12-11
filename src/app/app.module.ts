@@ -23,7 +23,6 @@ import { AppComponent } from './app.component';
 import { JwtInterceptor } from './_helpers';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
-import { HomeComponent } from './home';
 import { BillsComponent } from './bills/bills.component';
 import { OverviewComponent } from './overview/overview.component';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -31,16 +30,17 @@ import { MatExpansionModule } from '@angular/material/expansion';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 import { BillListItemComponent } from './bill-list-item/bill-list-item.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     BillsComponent,
     OverviewComponent,
     BillListItemComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

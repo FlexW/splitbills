@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container *ngIf="showSideNav" class="sidenav-container">
   <!-- Sidenav -->
   <mat-sidenav
     #drawer
@@ -33,7 +33,7 @@
         </button>
         <span>{{ title }}</span>
         <span style="flex: 1 1 auto"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+        <button *ngIf="showMenu" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
@@ -49,3 +49,27 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- Toolbar without sidenav -->
+<div
+  *ngIf="!showSideNav"
+  style="display: flex; flex-direction: column; height: 100%; width: 100%"
+>
+  <!-- Toolbar -->
+  <mat-toolbar color="primary" style="flex-grow: 1">
+    <span>{{ title }}</span>
+    <span style="flex: 1 1 auto"></span>
+    <button *ngIf="showMenu" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Create group</button>
+      <button mat-menu-item>Add bill</button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- Content -->
+  <div style="flex-grow: 12; height: 100%; width: 100%">
+    <router-outlet></router-outlet>
+  </div>
+</div>

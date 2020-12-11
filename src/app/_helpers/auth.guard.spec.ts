@@ -45,6 +45,6 @@ describe('AuthGuard', () => {
     >{ url: 'testUrl' });
 
     expect(result).toBe(false);
-    expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/welcome']);
   });
 });

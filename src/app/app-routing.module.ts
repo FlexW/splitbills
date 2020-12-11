@@ -5,16 +5,16 @@ import { AuthGuard } from './_helpers';
 
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
-import { HomeComponent } from './home';
 import { BillsComponent } from './bills/bills.component';
 import { OverviewComponent } from './overview/overview.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'bills', component: BillsComponent },
-  { path: 'overview', component: OverviewComponent },
+  { path: 'welcome', component: WelcomeComponent },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' },

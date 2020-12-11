@@ -1,0 +1,19 @@
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    margin: 2em auto;
+    max-width: 400px;
+    flex-direction: column;
+  "
+>
+  <h1 style="text-align: center">Welcome to SplitBills</h1>
+
+  <h3 style="margin: 8px; text-align: center">Already have an account?</h3>
+  <a mat-raised-button [routerLink]="['/login']">Login</a>
+
+  <h3 style="margin: 8px; text-align: center">
+    If you don't have an account, register one.
+  </h3>
+  <a mat-raised-button color="primary" [routerLink]="['/register']">Register</a>
+</div>
