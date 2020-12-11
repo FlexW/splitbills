@@ -9,7 +9,10 @@ import { ToolbarService } from '../_services/toolbar.service';
   styleUrls: ['./overview.component.sass'],
 })
 export class OverviewComponent {
-  constructor(private toolbarService: ToolbarService) {}
+  constructor(toolbarService: ToolbarService) {
+    toolbarService.setShowMenu(true);
+    toolbarService.setShowSideNav(true);
+  }
 
   onSelectedTabChange(event: MatTabChangeEvent) {}
 }

@@ -33,7 +33,7 @@ export class AppComponent {
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private toolbarService: ToolbarService
+    toolbarService: ToolbarService
   ) {
     toolbarService.title.subscribe((title) => {
       this.title = title;
@@ -48,6 +48,6 @@ export class AppComponent {
 
   logout(): void {
     this.authenticationService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/welcome']);
   }
 }
