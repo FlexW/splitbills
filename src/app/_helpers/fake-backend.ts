@@ -9,6 +9,7 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import { BillWithUsers } from '../models/models';
 
 interface User {
   lastName: string;
@@ -53,6 +54,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         case request.url.endsWith('/users') && request.method == 'POST':
           return register();
 
+        case request.url.match(/\/bills\/\d+$/) && request.method == 'GET':
+          return get_bills();
+
         default:
           // pass through any requests not handled above
           return next.handle(request);
@@ -60,6 +64,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     // route functions
+
+    function get_bills(): Observable<HttpEvent<unknown>> {
+      const bills: BillWithUsers[] = [
+        {
+          id: 1,
+          description: 'My first bill',
+          date: 'date',
+          dateCreated: 'dateCreated',
+          members: [],
+        },
+        {
+          id: 1,
+          description: 'My Second bill',
+          date: 'date',
+          dateCreated: 'dateCreated',
+          members: [],
+        },
+      ];
+
+      return ok({ bills: bills });
+    }
 
     function authenticate(): Observable<HttpEvent<unknown>> {
       const headers = request.headers;

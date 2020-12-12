@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 import { BillsService } from '../_services/bills.service';
 import { BillWithUsers } from '../models/models';
@@ -9,27 +14,14 @@ import { RequestError } from '../_services/requests-common';
   selector: 'app-bills',
   templateUrl: './bills.component.html',
   styleUrls: ['./bills.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillsComponent implements OnInit {
-  expand = false;
   bills: BillWithUsers[] = [];
 
   constructor(
     private billsService: BillsService,
     private authService: AuthenticationService
-  ) {
-    // for (let i = 0; i < 100; i++) {
-    //   const bill: BillWithUsers = {
-    //     id: 1,
-    //     description: 'Bill ' + i,
-    //     date: '20. November 2020',
-    //     dateCreated: '20. November 2020',
-    //     members: [],
-    //   };
-    //   this.bills.push(bill);
-    // }
-  }
+  ) {}
 
   ngOnInit(): void {
     this.fetchBills();
@@ -46,6 +38,7 @@ export class BillsComponent implements OnInit {
       .getBillsWithUsersByUserId(currentUser.id)
       .subscribe((result) => {
         if (!(result instanceof RequestError)) {
+          console.log(result);
           this.bills = result;
         }
       });
