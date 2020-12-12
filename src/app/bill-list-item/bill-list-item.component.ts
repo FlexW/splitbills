@@ -32,8 +32,8 @@ export class BillListItemComponent implements OnInit {
     return this._date;
   }
 
-  private _creditors: string[] = [];
-  get creditors(): string[] {
+  private _creditors: { label: string; style: { color: string } }[] = [];
+  get creditors(): { label: string; style: { color: string } }[] {
     return this._creditors;
   }
 
@@ -74,22 +74,28 @@ export class BillListItemComponent implements OnInit {
 
   private formatCreditors(
     members: {
+      id: number;
       firstName: string;
       lastName: string;
       amount: number;
     }[]
-  ): string[] {
-    const result: string[] = [];
+  ): { label: string; style: { color: string } }[] {
+    const result: { label: string; style: { color: string } }[] = [];
 
-    for (let i in members) {
+    for (let member of members) {
       // Is it a creditor?
-      if (members[i].amount < 0) {
-        const firstName = members[i].firstName;
-        const lastName = members[i].lastName;
-        const amount = formatAmount(Math.abs(members[i].amount));
-        const s = `${firstName} ${lastName} paid ${amount} €`;
+      if (member.amount < 0) {
+        const firstName = member.firstName;
+        const lastName = member.lastName;
+        const amount = formatAmount(Math.abs(member.amount));
+        const label = `${firstName} ${lastName} paid ${amount} €`;
 
-        result.push(s);
+        let style = { color: 'red' };
+        if (this._currentUserId === member.id) {
+          style = { color: 'green' };
+        }
+
+        result.push({ label: label, style: style });
       }
     }
 

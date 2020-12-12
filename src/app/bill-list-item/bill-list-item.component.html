@@ -11,7 +11,9 @@
       "
     >
       <div style="align-self: flex-start; color: red">
-        <div *ngFor="let creditor of creditors">{{ creditor }}<br /></div>
+        <div [ngStyle]="creditor.style" *ngFor="let creditor of creditors">
+          {{ creditor.label }}<br />
+        </div>
       </div>
       <div [ngStyle]="summaryStyle" style="align-self: flex-end; color: red">
         {{ summary }}
