@@ -69,7 +69,29 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const bills: BillWithUsers[] = [
         {
           id: 1,
-          description: 'My first bill',
+          description: 'My third bill',
+          date: '2020-12-10T14:20:27.541Z',
+          dateCreated: '2020-12-12T14:34:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+              amount: -1073,
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+              amount: 1073,
+            },
+          ],
+        },
+        {
+          id: 1,
+          description: 'My second bill',
           date: '2020-12-10T13:20:27.541Z',
           dateCreated: '2020-12-12T11:34:27.541Z',
           members: [
@@ -91,7 +113,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         },
         {
           id: 1,
-          description: 'My Second bill',
+          description: 'My first bill',
           date: '2020-12-10T11:33:27.541Z',
           dateCreated: '2020-12-12T11:33:27.541Z',
           members: [

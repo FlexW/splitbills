@@ -19,7 +19,7 @@ export class BillListItemComponent implements OnInit {
     this._date = this.formatDate(value.date);
     this._creditors = this.formatCreditors(value.members);
     this._debtors = this.formatDebtors(value.members);
-    this._summary = this.formatSummary(value.members);
+    this.setSummary(value.members);
   }
 
   private _description: string = '';
@@ -45,6 +45,11 @@ export class BillListItemComponent implements OnInit {
   private _summary: string = '';
   get summary(): string {
     return this._summary;
+  }
+
+  private _summaryStyle: { color: string } = { color: 'red' };
+  get summaryStyle(): { color: string } {
+    return this._summaryStyle;
   }
 
   private _currentUserId = 0;
@@ -115,12 +120,22 @@ export class BillListItemComponent implements OnInit {
     return result;
   }
 
-  private formatSummary(
+  private formatSummary(totalAmount: number): string {
+    if (totalAmount > 0) {
+      return `You borrowed ${formatAmount(Math.abs(totalAmount))} €`;
+    } else if (totalAmount < 0) {
+      return `You paid ${formatAmount(Math.abs(totalAmount))} €`;
+    } else {
+      return 'You are balanced';
+    }
+  }
+
+  private getTotalAmountOfCurrentUser(
     members: {
       id: number;
       amount: number;
     }[]
-  ): string {
+  ): number {
     let sum = 0;
 
     for (let member of members) {
@@ -129,12 +144,24 @@ export class BillListItemComponent implements OnInit {
       }
     }
 
-    if (sum > 0) {
-      return `You borrowed ${formatAmount(Math.abs(sum))} €`;
-    } else if (sum < 0) {
-      return `You paid ${formatAmount(Math.abs(sum))} €`;
-    } else {
-      return 'You are balanced';
+    return sum;
+  }
+
+  private getSummaryStyle(totalAmount: number) {
+    if (totalAmount > 0) {
+      return { color: 'red' };
     }
+    return { color: 'green' };
+  }
+
+  private setSummary(
+    members: {
+      id: number;
+      amount: number;
+    }[]
+  ) {
+    const totalAmount = this.getTotalAmountOfCurrentUser(members);
+    this._summary = this.formatSummary(totalAmount);
+    this._summaryStyle = this.getSummaryStyle(totalAmount);
   }
 }
