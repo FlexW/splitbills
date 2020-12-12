@@ -70,16 +70,67 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         {
           id: 1,
           description: 'My first bill',
-          date: 'date',
-          dateCreated: 'dateCreated',
-          members: [],
+          date: '2020-12-10T13:20:27.541Z',
+          dateCreated: '2020-12-12T11:34:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+              amount: 2050,
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+              amount: -2050,
+            },
+          ],
         },
         {
           id: 1,
           description: 'My Second bill',
-          date: 'date',
-          dateCreated: 'dateCreated',
-          members: [],
+          date: '2020-12-10T11:33:27.541Z',
+          dateCreated: '2020-12-12T11:33:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+              amount: 2050,
+            },
+            {
+              id: 3,
+              firstName: 'Gisela',
+              lastName: 'Muster',
+              email: 'gisela@mail.de',
+              amount: 1040,
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+              amount: -2050,
+            },
+            {
+              id: 3,
+              firstName: 'Gisela',
+              lastName: 'Muster',
+              email: 'gisela@mail.de',
+              amount: -540,
+            },
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+              amount: 500,
+            },
+          ],
         },
       ];
 

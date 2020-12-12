@@ -1,6 +1,6 @@
 <mat-card class="mat-elevation-z6">
-  <mat-card-title>{{ bill.description }}</mat-card-title>
-  <mat-card-subtitle>{{ bill.date }}</mat-card-subtitle>
+  <mat-card-title>{{ description }}</mat-card-title>
+  <mat-card-subtitle>{{ date }}</mat-card-subtitle>
   <mat-card-content>
     <div
       style="
@@ -11,17 +11,13 @@
       "
     >
       <div style="align-self: flex-start; color: red">
-        Max Muster paid 25.57 €
+        <div *ngFor="let creditor of creditors">{{ creditor }}<br /></div>
       </div>
       <div style="align-self: flex-end; color: red">You owe 15.30 €</div>
     </div>
     <mat-expansion-panel class="mat-elevation-z0" [expanded]="expand">
-      <div>
-        <br />
-        Felix Mann borrowed 15.00 €
-        <br />
-        Max Muster borrowed 10.57 €
-      </div>
+      <br />
+      <div *ngFor="let debtor of debtors">{{ debtor }} <br /></div>
     </mat-expansion-panel>
   </mat-card-content>
   <mat-card-actions style="padding: 0px">

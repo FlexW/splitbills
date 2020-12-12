@@ -38,7 +38,6 @@ export class BillsComponent implements OnInit {
       .getBillsWithUsersByUserId(currentUser.id)
       .subscribe((result) => {
         if (!(result instanceof RequestError)) {
-          console.log(result);
           this.bills = result;
         }
       });

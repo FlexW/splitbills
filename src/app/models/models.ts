@@ -3,5 +3,11 @@ export interface BillWithUsers {
   description: string;
   date: string;
   dateCreated: string;
-  members: { id: number; firstName: string; lastName: string; email: string }[];
+  members: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    amount: number;
+  }[];
 }
