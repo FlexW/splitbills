@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BillWithUsers } from '../models/models';
+import { AuthenticationService } from '../_services';
 
 function formatAmount(amount: number): string {
-  return (amount / 100.0).toString();
+  return (amount / 100.0).toFixed(2).toString();
 }
 
 @Component({
@@ -18,6 +19,7 @@ export class BillListItemComponent implements OnInit {
     this._date = this.formatDate(value.date);
     this._creditors = this.formatCreditors(value.members);
     this._debtors = this.formatDebtors(value.members);
+    this._summary = this.formatSummary(value.members);
   }
 
   private _description: string = '';
@@ -40,9 +42,25 @@ export class BillListItemComponent implements OnInit {
     return this._debtors;
   }
 
-  constructor() {}
+  private _summary: string = '';
+  get summary(): string {
+    return this._summary;
+  }
+
+  private _currentUserId = 0;
+
+  constructor(private authService: AuthenticationService) {
+    this.getCurrentUserId();
+  }
 
   ngOnInit(): void {}
+
+  private getCurrentUserId() {
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser != null) {
+      this._currentUserId = currentUser.id;
+    }
+  }
 
   private formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -95,5 +113,28 @@ export class BillListItemComponent implements OnInit {
     }
 
     return result;
+  }
+
+  private formatSummary(
+    members: {
+      id: number;
+      amount: number;
+    }[]
+  ): string {
+    let sum = 0;
+
+    for (let member of members) {
+      if (member.id == this._currentUserId) {
+        sum += member.amount;
+      }
+    }
+
+    if (sum > 0) {
+      return `You borrowed ${formatAmount(Math.abs(sum))} €`;
+    } else if (sum < 0) {
+      return `You paid ${formatAmount(Math.abs(sum))} €`;
+    } else {
+      return 'You are balanced';
+    }
   }
 }

@@ -128,7 +128,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               firstName: 'Max',
               lastName: 'Muster',
               email: 'muster@mail.de',
-              amount: 500,
+              amount: -500,
             },
           ],
         },
