@@ -19,8 +19,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   registerError: boolean = false;
   registerErrorMessage: string = 'Verify your inputs';
-  passwordErrorMessage: string =
-    'Please enter a password with minimum one upper case and a special character';
+  passwordErrorMessage: string = '';
 
   hasUpperCase(input: string) {
     for (let i = 0; i < input.length; i++) {
@@ -78,6 +77,7 @@ export class RegisterComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
+      this.passwordErrorMessage = 'Please enter a password';
       return;
     }
 
@@ -87,8 +87,20 @@ export class RegisterComponent implements OnInit {
     const firstName = controls.firstName.value;
     const email = controls.email.value;
     const password = controls.password.value;
+    const passwordRepeat = controls.passwordRepeat.value;
 
     if (!this.hasUpperCase(password) || !this.hasSpecialCharacter(password)) {
+      this.passwordErrorMessage =
+        'Please enter a password with minimum one upper case and a special character';
+      this.registerForm.controls['password'].setErrors({ incorrect: true });
+      return;
+    }
+
+    if (password != passwordRepeat) {
+      this.passwordErrorMessage = 'Passwords are different';
+      this.registerForm.controls['passwordRepeat'].setErrors({
+        incorrect: true,
+      });
       this.registerForm.controls['password'].setErrors({ incorrect: true });
       return;
     }
@@ -138,7 +150,7 @@ export class RegisterComponent implements OnInit {
     return this.passwordErrorMessage;
   }
   getPasswordRepeatErrorMessage(): string {
-    return '';
+    return this.passwordErrorMessage;
   }
   getRegisterErrorMessage(): string {
     return this.registerErrorMessage;
