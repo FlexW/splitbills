@@ -7,6 +7,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from '../_services';
 import { Router } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -21,7 +22,7 @@ describe('LoginComponent', () => {
     ]);
 
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ReactiveFormsModule],
+      imports: [HttpClientTestingModule, ReactiveFormsModule, MatIconModule],
       declarations: [LoginComponent],
       providers: [
         FormBuilder,

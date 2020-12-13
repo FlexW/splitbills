@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
   hidePassword = true;
 
   constructor(
-    private location: Location,
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
     private router: Router

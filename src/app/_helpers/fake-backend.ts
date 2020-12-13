@@ -9,6 +9,7 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import { BillWithUsers } from '../models/models';
 
 interface User {
   lastName: string;
@@ -53,6 +54,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         case request.url.endsWith('/users') && request.method == 'POST':
           return register();
 
+        case request.url.match(/\/bills\/\d+$/) && request.method == 'GET':
+          return get_bills();
+
         default:
           // pass through any requests not handled above
           return next.handle(request);
@@ -60,6 +64,100 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     // route functions
+
+    function get_bills(): Observable<HttpEvent<unknown>> {
+      const bills: BillWithUsers[] = [
+        {
+          id: 1,
+          description: 'My third bill',
+          date: '2020-12-10T14:20:27.541Z',
+          dateCreated: '2020-12-12T14:34:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+              amount: -1073,
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+              amount: 1073,
+            },
+          ],
+        },
+        {
+          id: 1,
+          description: 'My second bill',
+          date: '2020-12-10T13:20:27.541Z',
+          dateCreated: '2020-12-12T11:34:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+              amount: 2050,
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+              amount: -2050,
+            },
+          ],
+        },
+        {
+          id: 1,
+          description: 'My first bill',
+          date: '2020-12-10T11:33:27.541Z',
+          dateCreated: '2020-12-12T11:33:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+              amount: 2050,
+            },
+            {
+              id: 3,
+              firstName: 'Gisela',
+              lastName: 'Muster',
+              email: 'gisela@mail.de',
+              amount: 1040,
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+              amount: -2050,
+            },
+            {
+              id: 3,
+              firstName: 'Gisela',
+              lastName: 'Muster',
+              email: 'gisela@mail.de',
+              amount: -540,
+            },
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+              amount: -500,
+            },
+          ],
+        },
+      ];
+
+      return ok({ bills: bills });
+    }
 
     function authenticate(): Observable<HttpEvent<unknown>> {
       const headers = request.headers;
@@ -72,6 +170,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       });
       if (!user) return error('Email or password is incorrect');
       return ok({
+        id: user.id,
         token: 'fake-jwt-token',
       });
     }

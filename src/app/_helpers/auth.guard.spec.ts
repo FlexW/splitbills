@@ -6,11 +6,7 @@ import {
 import { AuthenticationService } from '../_services';
 
 import { AuthGuard } from './auth.guard';
-
-function spyPropertyGetter(spyObj: jasmine.SpyObj<unknown>, propName: string) {
-  return Object.getOwnPropertyDescriptor(spyObj, propName)
-    ?.get as jasmine.Spy<any>;
-}
+import { spyPropertyGetter } from './test-common';
 
 describe('AuthGuard', () => {
   let authGuard: AuthGuard;
@@ -49,6 +45,6 @@ describe('AuthGuard', () => {
     >{ url: 'testUrl' });
 
     expect(result).toBe(false);
-    expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/welcome']);
   });
 });
