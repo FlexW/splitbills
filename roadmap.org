@@ -1,0 +1,18 @@
+* Roadmap
+
+** TODO Implement Add Bill Screen
+
+** TODO Implement Bills Overview
+*** TODO Allow to delete bills
+*** TODO Allow to edit bills
+
+** TODO Implement Groups Overview Screen
+*** TODO Show all groups from user
+    Groups should show small summary how much the user owes or paid
+    for the group.
+*** TODO Allow to edit groups
+*** TODO Allow to delete groups
+
+** TODO Implement Friends Overview Screen
+*** TODO Show all friends from user
+    Friends should show small summary how much user owes or paid.
