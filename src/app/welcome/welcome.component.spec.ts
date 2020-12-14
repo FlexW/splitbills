@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { spyPropertyGetter } from '../_helpers/test-common';
 import { ToolbarService } from '../_services/toolbar.service';
 
@@ -8,8 +9,10 @@ describe('WelcomeComponent', () => {
   let component: WelcomeComponent;
   let fixture: ComponentFixture<WelcomeComponent>;
   let toolbarService: jasmine.SpyObj<ToolbarService>;
+  let router: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
+    router = jasmine.createSpyObj('Router', ['navigate']);
     toolbarService = jasmine.createSpyObj('ToolbarService', [
       'setShowMenu',
       'setShowSideNav',
@@ -18,7 +21,10 @@ describe('WelcomeComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [WelcomeComponent],
-      providers: [{ provide: ToolbarService, useValue: toolbarService }],
+      providers: [
+        { provide: ToolbarService, useValue: toolbarService },
+        { provide: Router, useValue: router },
+      ],
     }).compileComponents();
   });
 
@@ -27,6 +33,7 @@ describe('WelcomeComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     toolbarService = TestBed.inject(
       ToolbarService
     ) as jasmine.SpyObj<ToolbarService>;
