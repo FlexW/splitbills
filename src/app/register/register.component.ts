@@ -21,9 +21,13 @@ export class RegisterComponent implements OnInit {
   registerErrorMessage: string = 'Verify your inputs';
   passwordErrorMessage: string = '';
 
+  isAlpha(input: string): boolean {
+    return /^[\x41-\x5A][\x61-\x7A]*$/.test(input);
+  }
+
   hasUpperCase(input: string) {
     for (let i = 0; i < input.length; i++) {
-      if (input[i] === input[i].toUpperCase()) {
+      if (input[i] === input[i].toUpperCase() && this.isAlpha(input[i])) {
         return true;
       }
     }
@@ -44,6 +48,13 @@ export class RegisterComponent implements OnInit {
       ')',
       '-',
       '+',
+      '.',
+      ':',
+      '_',
+      '<',
+      '>',
+      '§',
+      '/',
     ];
     for (let i = 0; i < input.length; i++) {
       for (let j = 0; j < specialCharacters.length; j++) {

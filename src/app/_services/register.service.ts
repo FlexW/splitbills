@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
-interface RegisterRequestResult {
+export interface RegisterRequestResult {
   message: string;
   user: { id: number };
 }
