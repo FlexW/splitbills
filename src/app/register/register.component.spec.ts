@@ -1,4 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  ComponentFixtureAutoDetect,
+  TestBed,
+} from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
 import {
@@ -31,6 +35,7 @@ describe('RegisterComponent', () => {
         FormBuilder,
         { provide: RegisterService, useValue: registerService },
         { provide: Router, useValue: router },
+        { provide: ComponentFixtureAutoDetect, useValue: true },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -147,6 +152,32 @@ describe('RegisterComponent', () => {
 
       expect(registerService.register.calls.count()).toBe(0);
       expect(router.navigate.calls.count()).toBe(0);
+    });
+
+    it('passwords are different is displayed', () => {
+      registerService.register.and.returnValue(of({}));
+
+      const lastName = 'Maler';
+      const firstName = 'Monika';
+      const email = 'maler@handwerker.de';
+      const password = 'IchBinEinPasswort12!';
+      const passwordRepeat = 'IchBinEinPasswort123!';
+
+      const controls = component.registerForm.controls;
+
+      controls['lastName'].setValue(lastName);
+      controls['firstName'].setValue(firstName);
+      controls['email'].setValue(email);
+      controls['password'].setValue(password);
+      controls['passwordRepeat'].setValue(passwordRepeat);
+
+      component.onSubmit();
+      fixture.detectChanges();
+
+      const registerElement: HTMLElement = fixture.nativeElement;
+      const matError = registerElement.querySelector('#error-password-repeat');
+
+      expect(matError?.textContent).toEqual('Passwords are different');
     });
   });
 });

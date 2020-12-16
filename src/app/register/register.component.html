@@ -86,9 +86,11 @@
                 hidePassword ? "visibility_off" : "visibility"
               }}</mat-icon>
             </button>
-            <mat-error *ngIf="registerForm.controls.passwordRepeat.invalid">{{
-              getPasswordRepeatErrorMessage()
-            }}</mat-error>
+            <mat-error
+              id="error-password-repeat"
+              *ngIf="registerForm.controls.passwordRepeat.invalid"
+              >{{ getPasswordRepeatErrorMessage() }}</mat-error
+            >
           </mat-form-field>
         </p>
 

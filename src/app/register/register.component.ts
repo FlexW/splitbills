@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
     return /^[\x41-\x5A][\x61-\x7A]*$/.test(input);
   }
 
-  hasUpperCase(input: string) {
+  hasUpperCase(input: string): boolean {
     for (let i = 0; i < input.length; i++) {
       if (input[i] === input[i].toUpperCase() && this.isAlpha(input[i])) {
         return true;
@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     return false;
   }
 
-  hasSpecialCharacter(input: string) {
+  hasSpecialCharacter(input: string): boolean {
     let specialCharacters = [
       '!',
       '@',
