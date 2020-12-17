@@ -31,6 +31,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { fakeBackendProvider } from './_helpers';
 import { BillListItemComponent } from './bill-list-item/bill-list-item.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { GroupsComponent } from './groups/groups.component';
+import { GroupListItemComponent } from './group-list-item/group-list-item.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     OverviewComponent,
     BillListItemComponent,
     WelcomeComponent,
+    GroupsComponent,
+    GroupListItemComponent,
   ],
   imports: [
     BrowserModule,

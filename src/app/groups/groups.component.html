@@ -1,0 +1,10 @@
+<div style="width: 100%; height: 100%">
+  <cdk-virtual-scroll-viewport itemSize="30" class="viewport">
+    <app-group-list-item [group]="group" *cdkVirtualFor="let group of groups">
+    </app-group-list-item>
+  </cdk-virtual-scroll-viewport>
+
+  <button mat-fab style="position: absolute; bottom: 16px; right: 16px">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

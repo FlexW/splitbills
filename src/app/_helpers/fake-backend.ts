@@ -10,6 +10,7 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { BillWithUsers } from '../models/models';
+import { GroupWithUsers } from '../models/models';
 
 interface User {
   lastName: string;
@@ -56,6 +57,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         case request.url.match(/\/bills\/\d+$/) && request.method == 'GET':
           return get_bills();
+
+        case request.url.match(/\/groups\/\d+$/) && request.method == 'GET':
+          return get_groups();
 
         default:
           // pass through any requests not handled above
@@ -157,6 +161,91 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       ];
 
       return ok({ bills: bills });
+    }
+
+    function get_groups(): Observable<HttpEvent<unknown>> {
+      const groups: GroupWithUsers[] = [
+        {
+          id: 1,
+          description: 'My third group',
+          date: '2020-12-10T14:20:27.541Z',
+          dateCreated: '2020-12-12T14:34:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+            },
+          ],
+        },
+        {
+          id: 1,
+          description: 'My second group',
+          date: '2020-12-10T13:20:27.541Z',
+          dateCreated: '2020-12-12T11:34:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+            },
+          ],
+        },
+        {
+          id: 1,
+          description: 'My first group',
+          date: '2020-12-10T11:33:27.541Z',
+          dateCreated: '2020-12-12T11:33:27.541Z',
+          members: [
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+            },
+            {
+              id: 3,
+              firstName: 'Gisela',
+              lastName: 'Muster',
+              email: 'gisela@mail.de',
+            },
+            {
+              id: 2,
+              firstName: 'Hans',
+              lastName: 'Dieter',
+              email: 'Dieter@mail.de',
+            },
+            {
+              id: 3,
+              firstName: 'Gisela',
+              lastName: 'Muster',
+              email: 'gisela@mail.de',
+            },
+            {
+              id: 1,
+              firstName: 'Max',
+              lastName: 'Muster',
+              email: 'muster@mail.de',
+            },
+          ],
+        },
+      ];
+
+      return ok({ groups: groups });
     }
 
     function authenticate(): Observable<HttpEvent<unknown>> {

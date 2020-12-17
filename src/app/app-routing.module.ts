@@ -8,6 +8,7 @@ import { RegisterComponent } from './register';
 import { BillsComponent } from './bills/bills.component';
 import { OverviewComponent } from './overview/overview.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { GroupsComponent } from './groups/groups.component';
 
 const routes: Routes = [
   { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'bills', component: BillsComponent },
   { path: 'welcome', component: WelcomeComponent },
+  { path: 'groups', component: GroupsComponent },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' },

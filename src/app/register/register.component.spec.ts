@@ -179,5 +179,61 @@ describe('RegisterComponent', () => {
 
       expect(matError?.textContent).toEqual('Passwords are different');
     });
+
+    it('"passwords needs upper case" is displayed', () => {
+      registerService.register.and.returnValue(of({}));
+
+      const lastName = 'Maler';
+      const firstName = 'Monika';
+      const email = 'maler@handwerker.de';
+      const password = 'ichbineinpasswort123!';
+      const passwordRepeat = 'ichbineinpasswort123!';
+
+      const controls = component.registerForm.controls;
+
+      controls['lastName'].setValue(lastName);
+      controls['firstName'].setValue(firstName);
+      controls['email'].setValue(email);
+      controls['password'].setValue(password);
+      controls['passwordRepeat'].setValue(passwordRepeat);
+
+      component.onSubmit();
+      fixture.detectChanges();
+
+      const registerElement: HTMLElement = fixture.nativeElement;
+      const matError = registerElement.querySelector('#error-password');
+
+      expect(matError?.textContent).toEqual(
+        'Please enter a password with minimum one upper case and a special character'
+      );
+    });
+
+    it('"passwords needs special char" is displayed', () => {
+      registerService.register.and.returnValue(of({}));
+
+      const lastName = 'Maler';
+      const firstName = 'Monika';
+      const email = 'maler@handwerker.de';
+      const password = 'Ichbineinpasswort123';
+      const passwordRepeat = 'Ichbineinpasswort123';
+
+      const controls = component.registerForm.controls;
+
+      controls['lastName'].setValue(lastName);
+      controls['firstName'].setValue(firstName);
+      controls['email'].setValue(email);
+      controls['password'].setValue(password);
+      controls['passwordRepeat'].setValue(passwordRepeat);
+
+      component.onSubmit();
+      fixture.detectChanges();
+
+      const registerElement: HTMLElement = fixture.nativeElement;
+      const matError = registerElement.querySelector('#error-password');
+
+      expect(matError?.textContent).toEqual(
+        'Please enter a password with minimum one upper case and a special character'
+      );
+    });
   });
 });
