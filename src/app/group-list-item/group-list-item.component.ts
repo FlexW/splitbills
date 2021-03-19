@@ -50,10 +50,7 @@ export class GroupListItemComponent implements OnInit {
       const lastName = member.lastName;
       const label = `${firstName} ${lastName} is a member.`;
 
-      let style = { color: 'red' };
-      if (this._currentUserId === member.id) {
-        style = { color: 'green' };
-      }
+      let style = { color: 'black' };
 
       result.push({ label: label, style: style });
     }

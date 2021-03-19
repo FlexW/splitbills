@@ -44,13 +44,13 @@ describe('BillsService', () => {
       },
     ];
 
-    service.getBillsWithUsersByUserId(user_id).subscribe((result) => {
+    service.getBillsWithUsersByUserId().subscribe((result) => {
       expect(result).toEqual(expectedBills);
       done();
     });
 
     const request = httpTestingController.expectOne(
-      `${environment.apiUrl}/bills/${user_id}`
+      `${environment.apiUrl}/bills`
     );
 
     request.flush({
@@ -61,13 +61,13 @@ describe('BillsService', () => {
   it('should return bad request error', (done) => {
     const user_id = 1;
 
-    service.getBillsWithUsersByUserId(user_id).subscribe((result) => {
+    service.getBillsWithUsersByUserId().subscribe((result) => {
       expect(result).toBeInstanceOf(BadRequestError);
       done();
     });
 
     const request = httpTestingController.expectOne(
-      `${environment.apiUrl}/bills/${user_id}`
+      `${environment.apiUrl}/bills`
     );
 
     request.flush('', { status: 404, statusText: 'Bad Request' });
@@ -76,7 +76,7 @@ describe('BillsService', () => {
   it('should return unauthorized error', (done) => {
     const user_id = 1;
 
-    service.getBillsWithUsersByUserId(user_id).subscribe((result) => {
+    service.getBillsWithUsersByUserId().subscribe((result) => {
       expect(result).toBeInstanceOf(UnauthorizedError);
       done();
     });
@@ -91,13 +91,13 @@ describe('BillsService', () => {
   it('should return forbidden error', (done) => {
     const user_id = 1;
 
-    service.getBillsWithUsersByUserId(user_id).subscribe((result) => {
+    service.getBillsWithUsersByUserId().subscribe((result) => {
       expect(result).toBeInstanceOf(ForbiddenError);
       done();
     });
 
     const request = httpTestingController.expectOne(
-      `${environment.apiUrl}/bills/${user_id}`
+      `${environment.apiUrl}/bills`
     );
 
     request.flush('', { status: 403, statusText: 'Forbidden' });

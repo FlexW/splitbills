@@ -28,7 +28,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers';
+//import { fakeBackendProvider } from './_helpers';
 import { BillListItemComponent } from './bill-list-item/bill-list-item.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GroupsComponent } from './groups/groups.component';
@@ -70,7 +70,7 @@ import { GroupListItemComponent } from './group-list-item/group-list-item.compon
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    fakeBackendProvider,
+    //fakeBackendProvider,
   ],
   bootstrap: [AppComponent],
 })

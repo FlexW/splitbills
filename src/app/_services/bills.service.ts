@@ -11,22 +11,22 @@ interface BillsWithUsersRequestResult {
   bills: BillWithUsers[];
 }
 
+export interface BillsRequestResult {
+  message: string;
+  group: { id: number };
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class BillsService {
   constructor(private http: HttpClient) {}
 
-  getBillsWithUsersByUserId(
-    userId: number
-  ): Observable<BillWithUsers[] | RequestError> {
+  getBillsWithUsersByUserId(): Observable<BillWithUsers[] | RequestError> {
     return this.http
-      .get<BillsWithUsersRequestResult>(
-        `${environment.apiUrl}/bills/${userId}`,
-        {
-          headers: getHeaders(),
-        }
-      )
+      .get<BillsWithUsersRequestResult>(`${environment.apiUrl}/bills`, {
+        headers: getHeaders(),
+      })
       .pipe(
         map((result: BillsWithUsersRequestResult) => {
           return result.bills;

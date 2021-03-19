@@ -34,12 +34,10 @@ export class BillsComponent implements OnInit {
       return;
     }
 
-    this.billsService
-      .getBillsWithUsersByUserId(currentUser.id)
-      .subscribe((result) => {
-        if (!(result instanceof RequestError)) {
-          this.bills = result;
-        }
-      });
+    this.billsService.getBillsWithUsersByUserId().subscribe((result) => {
+      if (!(result instanceof RequestError)) {
+        this.bills = result;
+      }
+    });
   }
 }

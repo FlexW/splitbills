@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://splitbills.felixweilbach.de',
+  apiUrl: 'http://localhost:5000',
 };
 
 /*
