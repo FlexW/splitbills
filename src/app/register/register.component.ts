@@ -93,8 +93,8 @@ export class RegisterComponent implements OnInit {
 
     const controls = this.registerForm.controls;
 
-    const lastName = controls.lastName.value;
     const firstName = controls.firstName.value;
+    const lastName = controls.lastName.value;
     const email = controls.email.value;
     const password = controls.password.value;
     const passwordRepeat = controls.passwordRepeat.value;
@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
     }
 
     this.registerService
-      .register(lastName, firstName, email, password)
+      .register(firstName, lastName, email, password)
       .pipe(first())
       .subscribe(
         () => {

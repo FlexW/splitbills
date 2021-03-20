@@ -13,20 +13,20 @@
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <p>
           <mat-form-field appearance="fill">
-            <mat-label>Enter your last name</mat-label>
-            <input matInput required formControlName="lastName" />
-            <mat-error *ngIf="registerForm.controls.lastName.invalid">{{
-              getLastNameErrorMessage()
+            <mat-label>Enter your first name</mat-label>
+            <input matInput required formControlName="firstName" />
+            <mat-error *ngIf="registerForm.controls.firstName.invalid">{{
+              getFirstNameErrorMessage()
             }}</mat-error>
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field appearance="fill">
-            <mat-label>Enter your first name</mat-label>
-            <input matInput required formControlName="firstName" />
-            <mat-error *ngIf="registerForm.controls.firstName.invalid">{{
-              getFirstNameErrorMessage()
+            <mat-label>Enter your last name</mat-label>
+            <input matInput required formControlName="lastName" />
+            <mat-error *ngIf="registerForm.controls.lastName.invalid">{{
+              getLastNameErrorMessage()
             }}</mat-error>
           </mat-form-field>
         </p>
