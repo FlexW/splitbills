@@ -1,0 +1,71 @@
+<div style="width: 100%; height: 100%">
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      margin: 2em auto;
+      max-width: 400px;
+      flex-direction: column;
+    "
+  >
+    <form [formGroup]="addBillForm" (ngSubmit)="saveBill()">
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Enter a description</mat-label>
+        <input matInput required formControlName="description" />
+        <mat-error *ngIf="addBillForm.controls.description.invalid">{{
+          getDescriptionErrorMessage()
+        }}</mat-error>
+      </mat-form-field>
+
+      <div style="display: flex; justify-content: center; align-items: center">
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Enter a amount</mat-label>
+          <input matInput required formControlName="amount" type="number" />
+          <mat-error *ngIf="addBillForm.controls.amount.invalid">{{
+            getAmountErrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+
+        <span style="margin-left: 8px">
+          <div style="font-size: 3.5em">€</div>
+        </span>
+      </div>
+
+      <span>WHO PAID THE BILL?</span>
+      <mat-divider></mat-divider>
+
+      <button
+        mat-raised-button
+        color="primary"
+        style="width: 100%; margin: 8px"
+      >
+        ADD SOMEONE WHO PAID THE BILL
+      </button>
+
+      <mat-action-list>
+        <mat-list-item> Pepper </mat-list-item>
+        <mat-list-item> Salt </mat-list-item>
+        <mat-list-item> Paprika </mat-list-item>
+      </mat-action-list>
+
+      <span>WHO LENT MONEY?</span>
+      <mat-divider></mat-divider>
+      <button
+        mat-raised-button
+        color="primary"
+        style="width: 100%; margin: 8px"
+      >
+        ADD SOMEONE WHO LENT MONEY
+      </button>
+
+      <button
+        type="submit"
+        *ngIf="valid"
+        mat-fab
+        style="position: absolute; bottom: 16px; right: 16px"
+      >
+        <mat-icon>done_all</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>

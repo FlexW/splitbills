@@ -31,6 +31,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { fakeBackendProvider } from './_helpers';
 import { BillListItemComponent } from './bill-list-item/bill-list-item.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { AddBillComponent } from './add-bill/add-bill.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GroupListItemComponent } from './group-list-item/group-list-item.component';
 
@@ -43,6 +44,7 @@ import { GroupListItemComponent } from './group-list-item/group-list-item.compon
     OverviewComponent,
     BillListItemComponent,
     WelcomeComponent,
+    AddBillComponent,
     GroupsComponent,
     GroupListItemComponent,
   ],
