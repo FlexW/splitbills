@@ -33,11 +33,5 @@ export class BillsComponent implements OnInit {
     if (currentUser === null) {
       return;
     }
-
-    this.billsService.getBillsWithUsersByUserId().subscribe((result) => {
-      if (!(result instanceof RequestError)) {
-        this.bills = result;
-      }
-    });
   }
 }

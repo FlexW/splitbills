@@ -11,11 +11,6 @@ interface BillsWithUsersRequestResult {
   bills: BillWithUsers[];
 }
 
-export interface BillsRequestResult {
-  message: string;
-  group: { id: number };
-}
-
 @Injectable({
   providedIn: 'root',
 })

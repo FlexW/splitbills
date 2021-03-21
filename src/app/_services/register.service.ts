@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, retry } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
@@ -26,10 +26,10 @@ export class RegisterService {
       .post<RegisterRequestResult>(
         `${environment.apiUrl}/users`,
         {
-          "first_name": firstName,
-          "last_name": lastName,
-          "email": email,
-          "password": password,
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
         },
         {
           headers: this.getHeaders(),

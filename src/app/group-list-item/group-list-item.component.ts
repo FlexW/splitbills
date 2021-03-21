@@ -52,6 +52,9 @@ export class GroupListItemComponent implements OnInit {
 
       let style = { color: 'black' };
 
+      if (this._currentUserId === member.id) {
+        style = { color: 'green' };
+      }
       result.push({ label: label, style: style });
     }
     return result;
