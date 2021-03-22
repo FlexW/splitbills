@@ -17,8 +17,8 @@ export class RegisterService {
   constructor(private http: HttpClient) {}
 
   register(
-    lastName: string,
     firstName: string,
+    lastName: string,
     email: string,
     password: string
   ): Observable<unknown> {
@@ -26,8 +26,8 @@ export class RegisterService {
       .post<RegisterRequestResult>(
         `${environment.apiUrl}/users`,
         {
-          lastName: lastName,
-          firstName: firstName,
+          first_name: firstName,
+          last_name: lastName,
           email: email,
           password: password,
         },
