@@ -26,10 +26,10 @@ export class RegisterService {
       .post<RegisterRequestResult>(
         `${environment.apiUrl}/users`,
         {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password,
+          "first_name": firstName,
+          "last_name": lastName,
+          "email": email,
+          "password": password,
         },
         {
           headers: this.getHeaders(),
