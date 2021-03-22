@@ -46,8 +46,11 @@ export class AuthenticationService {
   login(email: string, password: string): Observable<unknown> {
     return this.http
       .post<AuthenticateRequestResult>(
-        `${environment.apiUrl}/users/authenticate`,
-        null,
+        `${environment.apiUrl}/tokens`,
+        {
+          email: email,
+          password: password,
+        },
         {
           headers: this.getHeaders(email, password),
         }
