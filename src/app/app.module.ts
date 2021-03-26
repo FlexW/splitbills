@@ -27,11 +27,11 @@ import { BillsComponent } from './bills/bills.component';
 import { OverviewComponent } from './overview/overview.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-// used to create fake backend
 import { BillListItemComponent } from './bill-list-item/bill-list-item.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GroupListItemComponent } from './group-list-item/group-list-item.component';
+import { AddGroupComponent } from './add-group/add-group.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +44,7 @@ import { GroupListItemComponent } from './group-list-item/group-list-item.compon
     WelcomeComponent,
     GroupsComponent,
     GroupListItemComponent,
+    AddGroupComponent,
   ],
   imports: [
     BrowserModule,

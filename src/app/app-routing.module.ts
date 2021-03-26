@@ -9,14 +9,34 @@ import { BillsComponent } from './bills/bills.component';
 import { OverviewComponent } from './overview/overview.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GroupsComponent } from './groups/groups.component';
+import { AddGroupComponent } from './add-group/add-group.component';
 
 const routes: Routes = [
-  { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
+  {
+    path: '',
+    component: OverviewComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'groups',
+        pathMatch: 'full',
+        component: GroupsComponent,
+      },
+      {
+        path: 'bills',
+        pathMatch: 'full',
+        component: BillsComponent,
+      },
+      {
+        path: 'addgroup',
+        pathMatch: 'full',
+        component: AddGroupComponent,
+      },
+    ],
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'bills', component: BillsComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'groups', component: GroupsComponent },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' },

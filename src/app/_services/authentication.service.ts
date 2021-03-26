@@ -45,16 +45,10 @@ export class AuthenticationService {
 
   login(email: string, password: string): Observable<unknown> {
     return this.http
-      .post<AuthenticateRequestResult>(
-        `${environment.apiUrl}/tokens`,
-        {
-          email: email,
-          password: password,
-        },
-        {
-          headers: this.getHeaders(email, password),
-        }
-      )
+      .post<AuthenticateRequestResult>(`${environment.apiUrl}/tokens`, {
+        email: email,
+        password: password,
+      })
       .pipe(
         map((result: AuthenticateRequestResult) => {
           // store user details and token in local storage to keep
@@ -77,12 +71,5 @@ export class AuthenticationService {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-  }
-
-  private getHeaders(email: string, password: string): HttpHeaders {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${btoa(email + ':' + password)}`,
-    });
   }
 }

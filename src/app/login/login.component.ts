@@ -35,12 +35,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.loginError = false;
-
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
-
     // try to login user
     const controls = this.loginForm.controls;
 

@@ -6,9 +6,9 @@ export function getHeaders(): HttpHeaders {
   });
 }
 
-export function getHeadersAuth(email: string, password: string): HttpHeaders {
+export function getHeadersAuth(token: string): HttpHeaders {
   return new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: `Basic ${btoa(email + ':' + password)}`,
+    Authorization: `Bearer ${token}`,
   });
 }

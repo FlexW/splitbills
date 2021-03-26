@@ -32,4 +32,12 @@ export class ToolbarService {
   setShowMenu(value: boolean) {
     this.showMenuSource.next(value);
   }
+
+  private showGoBackButtonSource = new Subject<boolean>();
+
+  showGoBackButton = this.showGoBackButtonSource.asObservable();
+
+  setShowGoBackButton(value: boolean) {
+    this.showGoBackButtonSource.next(value);
+  }
 }
