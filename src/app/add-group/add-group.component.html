@@ -27,7 +27,7 @@
   *ngIf="!isOn"
   (newIsOnEvent)="hideMemberListComponent($event)"
   [memberList]="memberList"
-  (newMemberListEvent)="getMemberList($event)"
+  (newMemberListEvent)="setMemberList($event)"
 ></app-add-member>
 
 <router-outlet></router-outlet>

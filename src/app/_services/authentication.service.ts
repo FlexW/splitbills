@@ -58,7 +58,7 @@ export class AuthenticationService {
             email: email,
             token: result.token,
           };
-
+          console.log('HALLO');
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
 

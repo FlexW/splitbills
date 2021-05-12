@@ -32,7 +32,10 @@ export class GroupsService {
       );
   }
 
-  createNewGroup(name: string, members: string[]): Observable<unknown> {
+  createNewGroup(
+    name: string,
+    members: { email: string }[]
+  ): Observable<unknown> {
     return this.http
       .post<CreateGroupRequestResult>(`${environment.apiUrl}/groups`, {
         name: name,

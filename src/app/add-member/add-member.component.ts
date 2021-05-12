@@ -12,6 +12,7 @@ export class AddMemberComponent implements OnInit {
 
   @Input() isOn: boolean = false;
   @Input() memberList: string[] = [];
+
   memberName: string = '';
 
   SendIsOn(value: boolean) {

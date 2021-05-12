@@ -9,6 +9,8 @@ import {
 import { ToolbarService } from '../_services/toolbar.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { GroupsService } from '../_services/groups.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-group',
@@ -26,12 +28,16 @@ export class AddGroupComponent implements OnInit {
 
   addGroupForm: FormGroup;
   isOn = true;
-  memberList: string[] = [];
+  memberList: { email: string }[] = [];
+
+  groupError: boolean = false;
+  groupErrorMessage: string = 'Verify your inputs';
 
   constructor(
     private toolbarService: ToolbarService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private groupsService: GroupsService
   ) {
     toolbarService.setShowMenu(false);
     toolbarService.setShowSideNav(false);
@@ -46,8 +52,15 @@ export class AddGroupComponent implements OnInit {
     isOn = true;
     this.isOn = isOn;
   }
-  getMemberList(memberList: string[]) {
-    this.memberList = memberList;
+
+  setMemberList(memberList: string[]) {
+    this.memberList = memberList.map((memberEmail: string) => {
+      return { email: memberEmail };
+    });
+  }
+
+  getGroupName(): string {
+    return this.groupName;
   }
   getNameErrorMessage() {
     return 'Enter a group name';
@@ -59,5 +72,18 @@ export class AddGroupComponent implements OnInit {
 
   createGroup(): void {
     console.log(this.memberList);
+    console.log(this.groupName);
+    this.groupsService
+      .createNewGroup(this.groupName, this.memberList)
+      .pipe(first())
+      .subscribe(
+        () => {
+          this.addGroupForm.reset();
+        },
+        (error) => {
+          this.groupError = true;
+          this.groupErrorMessage = error.error.message;
+        }
+      );
   }
 }
