@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { shareReplay, map } from 'rxjs/operators';
 import { ToolbarService } from './_services/toolbar.service';
+import { Location } from '@angular/common';
 
 import { AuthenticationService } from './_services';
 
@@ -19,6 +20,7 @@ export class AppComponent {
   title = 'SplitBills';
   showMenu = true;
   showSideNav = true;
+  showGoBackButton = false;
 
   currentUser: unknown;
 
@@ -30,6 +32,7 @@ export class AppComponent {
     );
 
   constructor(
+    private location: Location,
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -44,10 +47,17 @@ export class AppComponent {
     toolbarService.showSideNav.subscribe((value) => {
       this.showSideNav = value;
     });
+    toolbarService.showGoBackButton.subscribe((value) => {
+      this.showGoBackButton = value;
+    });
   }
 
   logout(): void {
     this.authenticationService.logout();
     this.router.navigate(['/welcome']);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

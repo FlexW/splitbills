@@ -12,7 +12,8 @@ export class OverviewComponent {
   constructor(toolbarService: ToolbarService) {
     toolbarService.setShowMenu(true);
     toolbarService.setShowSideNav(true);
+    toolbarService.setShowGoBackButton(false);
   }
 
-  onSelectedTabChange(event: MatTabChangeEvent) {}
+  onSelectedTabChange(event: MatTabChangeEvent): void {}
 }

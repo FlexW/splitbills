@@ -57,6 +57,15 @@
 >
   <!-- Toolbar -->
   <mat-toolbar color="primary" style="flex-grow: 1">
+    <button
+      type="button"
+      aria-label="Go back"
+      mat-icon-button
+      (click)="goBack()"
+      *ngIf="showGoBackButton"
+    >
+      <mat-icon aria-label="Go back button">arrow_back</mat-icon>
+    </button>
     <span>{{ title }}</span>
     <span style="flex: 1 1 auto"></span>
     <button *ngIf="showMenu" mat-icon-button [matMenuTriggerFor]="menu">

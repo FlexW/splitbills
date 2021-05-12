@@ -1,14 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { BillsService } from '../_services/bills.service';
 import { BillWithUsers } from '../models/models';
 import { AuthenticationService } from '../_services';
 import { RequestError } from '../_services/requests-common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bills',
@@ -19,12 +15,18 @@ export class BillsComponent implements OnInit {
   bills: BillWithUsers[] = [];
 
   constructor(
+    private router: Router,
     private billsService: BillsService,
     private authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
     this.fetchBills();
+  }
+
+  openAddBill(): void {
+    console.log('open add bill');
+    this.router.navigate(['/', 'addbill']);
   }
 
   private fetchBills(): void {
