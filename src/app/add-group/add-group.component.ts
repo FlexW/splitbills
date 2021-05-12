@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ToolbarService } from '../_services/toolbar.service';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-group',
@@ -13,31 +21,43 @@ export class AddGroupComponent implements OnInit {
     return this._valid;
   }
 
+  messages: any[] = [];
+  groupName: string = '';
+
   addGroupForm: FormGroup;
+  isOn = true;
+  memberList: string[] = [];
 
   constructor(
     private toolbarService: ToolbarService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
-    toolbarService.setShowMenu(true);
-    toolbarService.setShowSideNav(true);
+    toolbarService.setShowMenu(false);
+    toolbarService.setShowSideNav(false);
     toolbarService.setShowGoBackButton(true);
     //init form
     this.addGroupForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      members: ['', Validators.required],
     });
   }
 
-  saveGroup() {}
-
+  hideMemberListComponent(isOn: boolean) {
+    isOn = true;
+    this.isOn = isOn;
+  }
+  getMemberList(memberList: string[]) {
+    this.memberList = memberList;
+  }
   getNameErrorMessage() {
     return 'Enter a group name';
   }
 
-  getMemberErrorMessage() {
-    return 'Enter minimum one member';
-  }
-
   ngOnInit(): void {}
+
+  ngOnDestroy() {}
+
+  createGroup(): void {
+    console.log(this.memberList);
+  }
 }

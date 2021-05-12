@@ -10,6 +10,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GroupsComponent } from './groups/groups.component';
 import { AddGroupComponent } from './add-group/add-group.component';
+import { AddMemberComponent } from './add-member/add-member.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
         path: 'addgroup',
         pathMatch: 'full',
         component: AddGroupComponent,
+      },
+      {
+        path: 'addmember',
+        pathMatch: 'full',
+        component: AddMemberComponent,
       },
     ],
   },

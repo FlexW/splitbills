@@ -1,0 +1,27 @@
+<form>
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Add a member to the group</mat-label>
+    <input
+      matInput
+      type="email"
+      placeholder="mail address"
+      [(ngModel)]="memberName"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </mat-form-field>
+
+  <button mat-raised-button (click)="addClicked()">Add</button>
+
+  <mat-list *ngFor="let member of memberList">
+    <mat-list-item>{{ member }}</mat-list-item>
+  </mat-list>
+
+  <button
+    mat-raised-button
+    (click)="finishGroup()"
+    (click)="SendIsOn(isOn)"
+    (click)="SendMemberList(memberList)"
+  >
+    Finish
+  </button>
+</form>

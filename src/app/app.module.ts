@@ -17,6 +17,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GroupListItemComponent } from './group-list-item/group-list-item.component';
 import { AddGroupComponent } from './add-group/add-group.component';
+import { AddMemberComponent } from './add-member/add-member.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { AddGroupComponent } from './add-group/add-group.component';
     GroupsComponent,
     GroupListItemComponent,
     AddGroupComponent,
+    AddMemberComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ import { AddGroupComponent } from './add-group/add-group.component';
     MatTabsModule,
     MatMenuModule,
     MatExpansionModule,
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
