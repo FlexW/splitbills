@@ -11,23 +11,59 @@ enum LogLevel {
   providedIn: 'root',
 })
 export class LogService {
-  debug(tag: string, msg: any): void {
-    this.log(LogLevel.Debug, tag, msg);
+  debug(tag: string, msg: string, ...params: any[]): void {
+    this.log(LogLevel.Debug, tag, msg, params);
   }
 
-  info(tag: string, msg: any): void {
-    this.log(LogLevel.Info, tag, msg);
+  info(tag: string, msg: string, ...params: any[]): void {
+    this.log(LogLevel.Info, tag, msg, params);
   }
 
-  warning(tag: string, msg: any): void {
-    this.log(LogLevel.Warning, tag, msg);
+  warning(tag: string, msg: string, ...params: any[]): void {
+    this.log(LogLevel.Warning, tag, msg, params);
   }
 
-  error(tag: string, msg: any): void {
-    this.log(LogLevel.Error, tag, msg);
+  error(tag: string, msg: string, ...params: any[]): void {
+    this.log(LogLevel.Error, tag, msg, params);
   }
 
-  private log(level: LogLevel, tag: string, msg: any): void {
-    console.log(LogLevel[level] + ' (' + tag + ') ' + JSON.stringify(msg));
+  private log(
+    level: LogLevel,
+    tag: string,
+    msg: string,
+    ...params: any[]
+  ): void {
+    const logStatement = this.buildLogStatement(level, tag, msg, params);
+    console.log(logStatement);
+  }
+
+  private buildLogStatement(
+    level: LogLevel,
+    tag: string,
+    msg: string,
+    ...params: any[]
+  ): string {
+    let logStatement = `${LogLevel[level]} (${tag}) ${msg}`;
+
+    if (params.length != 0) {
+      logStatement += ' ' + this.formatExtraParams(params);
+    }
+
+    return logStatement;
+  }
+
+  private formatExtraParams(params: any[]): string {
+    let ret: string = params.join(',');
+
+    // Is there at least one object in the array?
+    if (params.some((p) => typeof p == 'object')) {
+      ret = '';
+
+      // Build comma-delimited string
+      for (const item of params) {
+        ret += JSON.stringify(item) + ',';
+      }
+    }
+    return ret;
   }
 }

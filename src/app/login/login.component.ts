@@ -47,7 +47,7 @@ export class LoginComponent {
 
     this.logService.debug(
       'LoginComponent',
-      'Login with email: ${email} and password: ${password}'
+      `Login with email: ${email} and password: ${password}`
     );
 
     this.authenticationService
@@ -60,6 +60,7 @@ export class LoginComponent {
           this.router.navigate(['/']);
         },
         (error) => {
+          this.logService.info('LoginComponent', 'Login failed', error);
           this.loginError = true;
           this.loginErrorMessage = error.error.message;
         }
