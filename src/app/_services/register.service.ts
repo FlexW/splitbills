@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
+import { getHeaders } from './service-common';
 
 export interface RegisterRequestResult {
   message: string;
@@ -17,8 +18,8 @@ export class RegisterService {
   constructor(private http: HttpClient) {}
 
   register(
-    lastName: string,
     firstName: string,
+    lastName: string,
     email: string,
     password: string
   ): Observable<unknown> {
@@ -26,13 +27,13 @@ export class RegisterService {
       .post<RegisterRequestResult>(
         `${environment.apiUrl}/users`,
         {
-          lastName: lastName,
-          firstName: firstName,
+          first_name: firstName,
+          last_name: lastName,
           email: email,
           password: password,
         },
         {
-          headers: this.getHeaders(),
+          headers: getHeaders(),
         }
       )
       .pipe(
@@ -40,10 +41,5 @@ export class RegisterService {
           console.log(result);
         })
       );
-  }
-  getHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
   }
 }

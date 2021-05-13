@@ -4,13 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../_services';
+import { LogService } from '../_services';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm: FormGroup;
   loginError = false;
   loginErrorMessage = 'Email or password wrong';
@@ -20,17 +21,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private logService: LogService
   ) {
     // init form
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required],
     });
-  }
-
-  ngOnInit(): void {
-    // Empty
   }
 
   onSubmit(): void {
@@ -46,6 +44,11 @@ export class LoginComponent implements OnInit {
 
     const email = controls.email.value;
     const password = controls.password.value;
+
+    this.logService.debug(
+      'LoginComponent',
+      'Login with email: ${email} and password: ${password}'
+    );
 
     this.authenticationService
       .login(email, password)

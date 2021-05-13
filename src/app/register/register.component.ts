@@ -17,9 +17,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  registerError: boolean = false;
-  registerErrorMessage: string = 'Verify your inputs';
-  passwordErrorMessage: string = '';
+  registerError = false;
+  registerErrorMessage = 'Verify your inputs';
+  passwordErrorMessage = '';
 
   isAlpha(input: string): boolean {
     return /^[\x41-\x5A][\x61-\x7A]*$/.test(input);
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
   }
 
   hasSpecialCharacter(input: string): boolean {
-    let specialCharacters = [
+    const specialCharacters = [
       '!',
       '@',
       '#',
@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
     }
 
     this.registerService
-      .register(lastName, firstName, email, password)
+      .register(firstName, lastName, email, password)
       .pipe(first())
       .subscribe(
         () => {

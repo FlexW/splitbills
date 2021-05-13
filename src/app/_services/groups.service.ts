@@ -5,10 +5,13 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { GroupWithUsers } from '../models/models';
 import { handleError, RequestError } from './requests-common';
-import { getHeaders } from './service-common';
 
 interface GroupsWithUsersRequestResult {
   groups: GroupWithUsers[];
+}
+
+interface CreateGroupRequestResult {
+  message: string;
 }
 
 @Injectable({
@@ -17,19 +20,28 @@ interface GroupsWithUsersRequestResult {
 export class GroupsService {
   constructor(private http: HttpClient) {}
 
-  getGroupsWithUsersByUserId(
-    userId: number
-  ): Observable<GroupWithUsers[] | RequestError> {
+  getGroupsWithUsersByUserId(): Observable<GroupWithUsers[] | RequestError> {
     return this.http
-      .get<GroupsWithUsersRequestResult>(
-        `${environment.apiUrl}/groups/${userId}`,
-        {
-          headers: getHeaders(),
-        }
-      )
+      .get<GroupsWithUsersRequestResult>(`${environment.apiUrl}/groups`)
       .pipe(
         map((result: GroupsWithUsersRequestResult) => {
           return result.groups;
+        }),
+        catchError(handleError)
+      );
+  }
+  createNewGroup(
+    name: string,
+    members: { email: string }[]
+  ): Observable<unknown> {
+    return this.http
+      .post<CreateGroupRequestResult>(`${environment.apiUrl}/groups`, {
+        name: name,
+        members: members,
+      })
+      .pipe(
+        map((result: CreateGroupRequestResult) => {
+          console.log(result);
         }),
         catchError(handleError)
       );

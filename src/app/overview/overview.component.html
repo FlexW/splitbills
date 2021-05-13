@@ -1,17 +1,12 @@
-<mat-tab-group
-  (selectedTabChange)="onSelectedTabChange($event)"
-  mat-stretch-tabs
-  style="height: 100%; width: 100%"
->
-  <mat-tab label="Friends">
-    <div style="height: 100%; width: 100%"><h1>COMING SOON</h1></div>
-  </mat-tab>
-
-  <mat-tab label="Groups">
-    <app-groups style="height: 100%; width: 100%"></app-groups>
-  </mat-tab>
-
-  <mat-tab label="Bills">
-    <app-bills style="height: 100%; width: 100%"></app-bills>
-  </mat-tab>
-</mat-tab-group>
+<nav mat-tab-nav-bar mat-align-tabs="center">
+  <a
+    mat-tab-link
+    *ngFor="let l of navigation"
+    [routerLink]="rootUrl + l.link"
+    [active]="this.router.url === rootUrl + l.link"
+    style="width: 100%"
+  >
+    {{ l.name }}
+  </a>
+</nav>
+<router-outlet></router-outlet>

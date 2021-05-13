@@ -4,7 +4,11 @@
     </app-group-list-item>
   </cdk-virtual-scroll-viewport>
 
-  <button mat-fab style="position: absolute; bottom: 16px; right: 16px">
+  <button
+    mat-fab
+    style="position: absolute; bottom: 16px; right: 16px"
+    (click)="openAddGroup()"
+  >
     <mat-icon>add</mat-icon>
   </button>
 </div>

@@ -17,6 +17,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,13 +28,13 @@ import { BillsComponent } from './bills/bills.component';
 import { OverviewComponent } from './overview/overview.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers';
 import { BillListItemComponent } from './bill-list-item/bill-list-item.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GroupListItemComponent } from './group-list-item/group-list-item.component';
 import { AddBillComponent } from './add-bill/add-bill.component';
+import { AddGroupComponent } from './add-group/add-group.component';
+import { AddMemberComponent } from './add-member/add-member.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,8 @@ import { AddBillComponent } from './add-bill/add-bill.component';
     AddBillComponent,
     GroupsComponent,
     GroupListItemComponent,
+    AddGroupComponent,
+    AddMemberComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,10 +72,10 @@ import { AddBillComponent } from './add-bill/add-bill.component';
     MatTabsModule,
     MatMenuModule,
     MatExpansionModule,
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    fakeBackendProvider,
   ],
   bootstrap: [AppComponent],
 })
