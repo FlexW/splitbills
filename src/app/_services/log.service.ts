@@ -12,6 +12,7 @@ enum LogLevel {
 })
 export class LogService {
   debug(tag: string, msg: string, ...params: any[]): void {
+    console.log(params.length);
     this.log(LogLevel.Debug, tag, msg, params);
   }
 
@@ -27,12 +28,7 @@ export class LogService {
     this.log(LogLevel.Error, tag, msg, params);
   }
 
-  private log(
-    level: LogLevel,
-    tag: string,
-    msg: string,
-    ...params: any[]
-  ): void {
+  private log(level: LogLevel, tag: string, msg: string, params: any[]): void {
     const logStatement = this.buildLogStatement(level, tag, msg, params);
     console.log(logStatement);
   }
@@ -41,8 +37,9 @@ export class LogService {
     level: LogLevel,
     tag: string,
     msg: string,
-    ...params: any[]
+    params: any[]
   ): string {
+    console.log(params.length);
     let logStatement = `${LogLevel[level]} (${tag}) ${msg}`;
 
     if (params.length != 0) {
