@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToolbarService } from '../_services/toolbar.service';
 import { Router } from '@angular/router';
@@ -17,14 +17,13 @@ export class AddGroupComponent {
     return this._valid;
   }
 
-  groupName = '';
-
   addGroupForm: FormGroup;
-  isOn = true;
+  displayGroupComponent = true;
   memberList: string[] = [];
 
   groupError = false;
   groupErrorMessage = 'Verify your inputs';
+  groupName = '';
 
   constructor(
     private toolbarService: ToolbarService,
@@ -41,9 +40,9 @@ export class AddGroupComponent {
     });
   }
 
-  hideMemberListComponent(isOn: boolean): void {
-    isOn = true;
-    this.isOn = isOn;
+  hideMemberListComponent(displayGroupComponent: boolean): void {
+    displayGroupComponent = true;
+    this.displayGroupComponent = displayGroupComponent;
   }
 
   setMemberList(memberList: string[]): void {

@@ -1,6 +1,6 @@
 <form>
   <mat-form-field appearance="fill" style="width: 100%">
-    <mat-label>Add a member to the group</mat-label>
+    <mat-label>Add a member to the group {{ groupName }}</mat-label>
     <input
       matInput
       type="email"
@@ -10,18 +10,46 @@
     />
   </mat-form-field>
 
-  <button mat-raised-button (click)="addClicked()">Add</button>
+  <div>
+    <mat-list dense *ngFor="let member of memberList">
+      <mat-list-item
+        style="display: flex; justify-content: center; align-items: center"
+        >{{ member }}
+        <mat-icon matListIcon style="margin-right: 16px">person_add</mat-icon>
+      </mat-list-item>
+    </mat-list>
+  </div>
 
-  <mat-list *ngFor="let member of memberList">
-    <mat-list-item>{{ member }}</mat-list-item>
-  </mat-list>
-
-  <button
-    mat-raised-button
-    (click)="finishGroup()"
-    (click)="SendIsOn(isOn)"
-    (click)="SendMemberList(memberList)"
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 8px;
+    "
   >
-    Finish
-  </button>
+    <button mat-raised-button color="primary" (click)="addClicked()">+</button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 8px;
+    "
+  >
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="finishGroup()"
+      (click)="sendDisplayGroupComponent(displayGroupComponent)"
+      (click)="sendMemberList(memberList)"
+      [disabled]="memberList.length == 0"
+    >
+      Finish
+    </button>
+  </div>
 </form>
