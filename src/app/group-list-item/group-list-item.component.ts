@@ -7,7 +7,7 @@ import { AuthenticationService } from '../_services';
   templateUrl: './group-list-item.component.html',
   styleUrls: ['./group-list-item.component.sass'],
 })
-export class GroupListItemComponent implements OnInit {
+export class GroupListItemComponent {
   expand = false;
 
   @Input() set group(value: GroupWithUsers) {
@@ -16,12 +16,12 @@ export class GroupListItemComponent implements OnInit {
     this._members = this.formatMembers(value.members);
   }
 
-  private _description: string = '';
+  private _description = '';
   get description(): string {
     return this._description;
   }
 
-  private _date: string = '';
+  private _date = '';
   get date(): string {
     return this._date;
   }
@@ -45,7 +45,7 @@ export class GroupListItemComponent implements OnInit {
   ): { label: string; style: { color: string } }[] {
     const result: { label: string; style: { color: string } }[] = [];
 
-    for (let member of members) {
+    for (const member of members) {
       const firstName = member.firstName;
       const lastName = member.lastName;
       const label = `${firstName} ${lastName} is a member.`;
@@ -67,11 +67,10 @@ export class GroupListItemComponent implements OnInit {
   }
 
   private getCurrentUserId() {
-    const currentUser = this.authService.currentUserValue;
-    if (currentUser != null) {
-      this._currentUserId = currentUser.id;
-    }
+    // TODO: Get current user id
+    // const currentUser = this.authService.currentUserValue;
+    // if (currentUser != null) {
+    //   this._currentUserId = currentUser.id;
+    // }
   }
-
-  ngOnInit(): void {}
 }

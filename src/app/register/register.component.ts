@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../_services';
+import { LogService } from '../_services';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -71,7 +66,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
-    private router: Router
+    private router: Router,
+    private logService: LogService
   ) {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.email, Validators.required]],
@@ -115,16 +111,28 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    this.logService.debug(
+      'RegisterComponent',
+      `Register with first name ${firstName}, last name ${lastName} and email ${email}`
+    );
+
     this.registerService
       .register(firstName, lastName, email, password)
       .pipe(first())
       .subscribe(
         () => {
+          this.logService.info('RegisterComponent', `Registration successful`);
           this.registerForm.reset();
 
           this.router.navigate(['/']);
         },
         (error) => {
+          this.logService.info(
+            'RegisterComponent',
+            `Registration failed`,
+            error
+          );
+
           this.registerError = true;
           this.registerErrorMessage = error.error.message;
         }

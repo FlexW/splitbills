@@ -17,16 +17,11 @@ interface BillsWithUsersRequestResult {
 export class BillsService {
   constructor(private http: HttpClient) {}
 
-  getBillsWithUsersByUserId(
-    userId: number
-  ): Observable<BillWithUsers[] | RequestError> {
+  getBillsWithUsers(): Observable<BillWithUsers[] | RequestError> {
     return this.http
-      .get<BillsWithUsersRequestResult>(
-        `${environment.apiUrl}/bills/${userId}`,
-        {
-          headers: getHeaders(),
-        }
-      )
+      .get<BillsWithUsersRequestResult>(`${environment.apiUrl}/bills`, {
+        headers: getHeaders(),
+      })
       .pipe(
         map((result: BillsWithUsersRequestResult) => {
           return result.bills;

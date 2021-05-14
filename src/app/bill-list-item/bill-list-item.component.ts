@@ -11,7 +11,7 @@ function formatAmount(amount: number): string {
   templateUrl: './bill-list-item.component.html',
   styleUrls: ['./bill-list-item.component.sass'],
 })
-export class BillListItemComponent implements OnInit {
+export class BillListItemComponent {
   expand = false;
 
   @Input() set bill(value: BillWithUsers) {
@@ -22,12 +22,12 @@ export class BillListItemComponent implements OnInit {
     this.setSummary(value.members);
   }
 
-  private _description: string = '';
+  private _description = '';
   get description(): string {
     return this._description;
   }
 
-  private _date: string = '';
+  private _date = '';
   get date(): string {
     return this._date;
   }
@@ -42,7 +42,7 @@ export class BillListItemComponent implements OnInit {
     return this._debtors;
   }
 
-  private _summary: string = '';
+  private _summary = '';
   get summary(): string {
     return this._summary;
   }
@@ -58,13 +58,12 @@ export class BillListItemComponent implements OnInit {
     this.getCurrentUserId();
   }
 
-  ngOnInit(): void {}
-
   private getCurrentUserId() {
-    const currentUser = this.authService.currentUserValue;
-    if (currentUser != null) {
-      this._currentUserId = currentUser.id;
-    }
+    // TODO: Get current user id
+    // const currentUser = this.authService.currentUserValue;
+    // if (currentUser != null) {
+    //   this._currentUserId = currentUser.id;
+    // }
   }
 
   private formatDate(dateString: string): string {
@@ -82,7 +81,7 @@ export class BillListItemComponent implements OnInit {
   ): { label: string; style: { color: string } }[] {
     const result: { label: string; style: { color: string } }[] = [];
 
-    for (let member of members) {
+    for (const member of members) {
       // Is it a creditor?
       if (member.amount < 0) {
         const firstName = member.firstName;
@@ -111,7 +110,7 @@ export class BillListItemComponent implements OnInit {
   ): string[] {
     const result: string[] = [];
 
-    for (let i in members) {
+    for (const i in members) {
       // Is it a debtor?
       if (members[i].amount > 0) {
         const firstName = members[i].firstName;
@@ -144,7 +143,7 @@ export class BillListItemComponent implements OnInit {
   ): number {
     let sum = 0;
 
-    for (let member of members) {
+    for (const member of members) {
       if (member.id == this._currentUserId) {
         sum += member.amount;
       }

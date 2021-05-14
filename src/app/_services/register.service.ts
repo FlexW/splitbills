@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { getHeaders } from './service-common';
+import { LogService } from './log.service';
 
 export interface RegisterRequestResult {
   message: string;
@@ -15,7 +16,7 @@ export interface RegisterRequestResult {
   providedIn: 'root',
 })
 export class RegisterService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private logService: LogService) {}
 
   register(
     firstName: string,
@@ -38,7 +39,11 @@ export class RegisterService {
       )
       .pipe(
         map((result: RegisterRequestResult) => {
-          console.log(result);
+          this.logService.debug(
+            'RegisterService',
+            'Registration result:',
+            result
+          );
         })
       );
   }

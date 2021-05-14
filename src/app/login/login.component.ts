@@ -45,10 +45,7 @@ export class LoginComponent {
     const email = controls.email.value;
     const password = controls.password.value;
 
-    this.logService.debug(
-      'LoginComponent',
-      `Login with email: ${email} and password: ${password}`
-    );
+    this.logService.debug('LoginComponent', `Login with email ${email}`);
 
     this.authenticationService
       .login(email, password)

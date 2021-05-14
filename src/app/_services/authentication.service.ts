@@ -4,16 +4,22 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
+import { LogService } from './log.service';
 
-interface CurrentUser {
+interface Token {
   id: number;
-  email: string;
   token: string;
 }
 
+interface CurrentUser {
+  email: string;
+  accessToken: Token;
+  refreshToken: Token;
+}
+
 interface AuthenticateRequestResult {
-  id: number;
-  token: string;
+  access_token: Token;
+  refresh_token: Token;
 }
 
 @Injectable({
@@ -24,7 +30,7 @@ export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<CurrentUser | null>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private logService: LogService) {
     const currentUserData = localStorage.getItem('currentUser');
 
     if (currentUserData !== null) {
@@ -51,13 +57,25 @@ export class AuthenticationService {
       })
       .pipe(
         map((result: AuthenticateRequestResult) => {
+          this.logService.debug(
+            'AuthenticationService',
+            'Authentication request result:',
+            result
+          );
+
           // store user details and token in local storage to keep
           // user logged in between page refreshes
           const user: CurrentUser = {
-            id: result.id,
             email: email,
-            token: result.token,
+            accessToken: result['access_token'],
+            refreshToken: result['refresh_token'],
           };
+
+          this.logService.debug(
+            'AuthenticationService',
+            'Store user in local storage:',
+            user
+          );
 
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
