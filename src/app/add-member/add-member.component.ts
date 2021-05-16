@@ -6,19 +6,20 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./add-member.component.sass'],
 })
 export class AddMemberComponent {
-  @Output() newIsOnEvent = new EventEmitter<boolean>();
+  @Output() newDisplayGroupComponentEvent = new EventEmitter<boolean>();
   @Output() newMemberListEvent = new EventEmitter<string[]>();
 
-  @Input() isOn = false;
+  @Input() displayGroupComponent = false;
   @Input() memberList: string[] = [];
+  @Input() groupName: string = '';
 
   memberName = '';
 
-  SendIsOn(value: boolean): void {
-    this.newIsOnEvent.emit(value);
+  sendDisplayGroupComponent(value: boolean): void {
+    this.newDisplayGroupComponentEvent.emit(value);
   }
 
-  SendMemberList(value: string[]): void {
+  sendMemberList(value: string[]): void {
     this.newMemberListEvent.emit(value);
   }
 

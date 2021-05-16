@@ -1,6 +1,6 @@
-<form [formGroup]="addGroupForm" *ngIf="isOn">
+<form [formGroup]="addGroupForm" *ngIf="displayGroupComponent">
   <mat-form-field appearance="fill" style="width: 100%">
-    <mat-label>Enter a group name</mat-label>
+    <mat-label>Enter a group name *</mat-label>
     <input
       matInput
       type="text"
@@ -9,24 +9,69 @@
     />
   </mat-form-field>
 
-  <button
-    mat-raised-button
-    color="primary"
-    [disabled]="groupName === ''"
-    (click)="isOn = false"
-  >
-    Add group members
-  </button>
+  <span style="display: flex; justify-content: center">
+    WHO IS A MEMBER OF THE GROUP?
+  </span>
 
-  <button mat-raised-button color="primary" (click)="createGroup()">
-    Create group
-  </button>
+  <div>
+    <mat-list dense *ngFor="let member of memberList">
+      <mat-list-item
+        style="display: flex; justify-content: center; align-items: center"
+        >{{ member }}
+        <mat-icon matListIcon style="margin-right: 16px">person_add</mat-icon>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 8px;
+    "
+  >
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="groupName === ''"
+      (click)="displayGroupComponent = false"
+    >
+      Add group members
+    </button>
+  </div>
+
+  <span style="display: flex; justify-content: center; margin-top: 20px">
+    HAVE ALL MEMBERS BEEN ADDED?
+  </span>
+  <mat-divider></mat-divider>
+
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 8px;
+    "
+  >
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="createGroup()"
+      [disabled]="groupName === '' || memberList.length == 0"
+    >
+      Create group {{ groupName }}
+    </button>
+  </div>
 </form>
+
 <app-add-member
-  [isOn]="isOn"
-  *ngIf="!isOn"
-  (newIsOnEvent)="hideMemberListComponent($event)"
+  [displayGroupComponent]="displayGroupComponent"
   [memberList]="memberList"
+  [groupName]="groupName"
+  *ngIf="!displayGroupComponent"
+  (newDisplayGroupComponentEvent)="hideMemberListComponent($event)"
   (newMemberListEvent)="setMemberList($event)"
 ></app-add-member>
 
