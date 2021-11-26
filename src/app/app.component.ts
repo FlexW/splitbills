@@ -17,7 +17,7 @@ import { AuthenticationService } from './_services';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
-  title = 'SplitBills';
+  title = 'Splitbills';
   showMenu = true;
   showSideNav = true;
   showGoBackButton = false;

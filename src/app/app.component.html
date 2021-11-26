@@ -31,7 +31,7 @@
         >
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span>{{ title }}</span>
+        <span class="app-title">{{ title }}</span>
         <span style="flex: 1 1 auto"></span>
         <button *ngIf="showMenu" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
@@ -66,7 +66,7 @@
     >
       <mat-icon aria-label="Go back button">arrow_back</mat-icon>
     </button>
-    <span>{{ title }}</span>
+    <span class="app-title">{{ title }}</span>
     <span style="flex: 1 1 auto"></span>
     <button *ngIf="showMenu" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
